@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   latestNewsContainer: {
     width: "100%",
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#E6F4EA", // verde pastel claro
     borderRadius: 0,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
     textAlign: "left",
+    color: "#2F4F3E", // verde oscuro para títulos
   },
   newsCard: {
     marginBottom: 15,
@@ -56,22 +57,22 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    backgroundColor: "rgba(46, 125, 50, 0.7)", // verde oscuro semi-transparente
     padding: 10,
   },
   newsDate: {
     fontSize: 12,
-    color: "#fff",
+    color: "#DFF5E1", // verde pastel muy claro
     marginBottom: 5,
   },
   newsTitle: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#E8F5E9", // verde claro casi blanco
   },
   newsDescription: {
     fontSize: 14,
-    color: "#ddd",
+    color: "#CDE5D4", // verde grisáceo pastel
   },
 });
 

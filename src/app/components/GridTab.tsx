@@ -131,16 +131,16 @@ const GridTabs = ({ tabs, tabContent, initialTab }: GridTabsProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F8F8',
+    backgroundColor: "#D1FAE5", // fondo verde muy claro
   },
   tabsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     paddingVertical: 12,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#ECFDF5', // verde pastel claro
     marginBottom: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '#EEE',
+    borderBottomColor: '#BBF7D0', // verde tenue
   },
   tabButton: {
     paddingHorizontal: 16,
@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   activeTabButton: {
-    backgroundColor: '#2A59FE',
+    backgroundColor: '#6EE7B7', // verde menta vivo
   },
   tabText: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#666',
+    color: '#4B5563', // gris verdoso
   },
   activeTabText: {
     color: '#FFFFFF',
@@ -185,32 +185,32 @@ const styles = StyleSheet.create({
   productName: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#333',
+    color: '#064E3B', // verde oscuro accesible
     marginBottom: 4,
   },
   productDescription: {
     fontSize: 12,
-    color: '#666',
+    color: '#4B5563',
     marginBottom: 4,
   },
   productPrice: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#2A59FE',
+    color: '#10B981', // verde vibrante
   },
   actionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 8,
     borderTopWidth: 1,
-    borderTopColor: '#EEE',
+    borderTopColor: '#BBF7D0',
   },
   actionButton: {
     padding: 8,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -231,20 +231,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 8,
-    color: '#333',
+    color: '#065F46', // verde fuerte
   },
   modalDescription: {
     fontSize: 16,
-    color: '#666',
+    color: '#4B5563',
     marginBottom: 12,
   },
   modalPrice: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#2A59FE',
+    color: '#10B981',
   },
   closeButton: {
-    backgroundColor: '#2A59FE',
+    backgroundColor: '#10B981',
     padding: 12,
     alignItems: 'center',
   },

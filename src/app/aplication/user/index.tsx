@@ -105,7 +105,7 @@ const products = [
   },
 ];
 
-export default function User(): JSX.Element {
+export default function Lawyer(): JSX.Element {
   const { top, bottom } = useSafeAreaInsets();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
@@ -204,23 +204,23 @@ export default function User(): JSX.Element {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white" contentContainerStyle={{ paddingBottom: bottom }}>
+    <ScrollView className="flex-1 bg-green-200 " contentContainerStyle={{ paddingBottom: bottom }}>
       {/* Header de navegación */}
       <View
         style={{ paddingTop: top }}
-        className="px-4 py-3 bg-white shadow-md flex-row justify-between items-center"
+        className="px-4 py-3 bg-green-200  shadow-md flex-row justify-between items-center"
       >
         <Link className="font-bold text-xl text-blue-700" href="/">
           ACME
         </Link>
         <View className="flex-row gap-4">
-          <Link className="text-md font-medium text-blue-600" href="/">
+          <Link className="text-md font-medium text-green-700" href="/">
             About
           </Link>
-          <Link className="text-md font-medium text-blue-600" href="/">
+          <Link className="text-md font-medium text-green-700" href="/">
             Product
           </Link>
-          <Link className="text-md font-medium text-blue-600" href="/">
+          <Link className="text-md font-medium text-green-700" href="/">
             Pricing
           </Link>
         </View>
@@ -252,17 +252,17 @@ export default function User(): JSX.Element {
         data={doctors}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <View className="flex-row items-center bg-blue-100 rounded-lg mb-3 p-3 shadow-md">
+          <View className="flex-row items-center bg-green-200 rounded-lg mb-3 p-3 shadow-md">
             <Image source={{ uri: item.avatar }} className="w-16 h-16 rounded-full" />
             <View className="ml-3 flex-1">
               <Text className="text-base font-semibold text-blue-800">{item.name}</Text>
               <Text className="text-sm text-gray-600">Edad: {item.age}</Text>
             </View>
             <TouchableOpacity
-              className="bg-blue-600 px-3 py-1 rounded-lg"
+              className="bg-green-200 px-3 py-1 rounded-lg"
               onPress={() => openDoctorModal(item)}
             >
-              <Text className="text-white text-sm">Ver más</Text>
+              <Text className="text-green-800 text-sm">Ver más</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -290,16 +290,16 @@ export default function User(): JSX.Element {
           />
           {/* Botones de navegación */}
           <TouchableOpacity
-            className="absolute top-1/2 left-0 transform -translate-y-1/2 p-2 bg-gray-700 bg-opacity-60 rounded-full"
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 p-2 bg-green-700bg-opacity-60 rounded-full"
             onPress={handlePrev}
           >
-            <Text className="text-white text-xl">{"<"}</Text>
+            <Text className="text-green-800 text-xl">{"<"}</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-gray-700 bg-opacity-60 rounded-full"
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-green-700bg-opacity-60 rounded-full"
             onPress={handleNext}
           >
-            <Text className="text-white text-xl">{">"}</Text>
+            <Text className="text-green-800 text-xl">{">"}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -317,7 +317,7 @@ export default function User(): JSX.Element {
           >
             <Text
               className={`text-xs ${
-                selectedTab === tab ? "text-white" : "text-black"
+                selectedTab === tab ? "text-green-800" : "text-black"
               }`}
             >
               {tab}
@@ -332,7 +332,7 @@ export default function User(): JSX.Element {
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
-          <View className="w-40 m-2 bg-white rounded-xl p-3 shadow-sm">
+          <View className="w-40 m-2 bg-green-200  rounded-xl p-3 shadow-sm">
             <Image source={{ uri: item.image }} className="w-full h-24 rounded-md" />
             <Text className="text-sm font-bold mt-2">{item.name}</Text>
             <Text className="text-xs text-gray-600 mt-1">{item.description}</Text>
@@ -362,7 +362,7 @@ export default function User(): JSX.Element {
       />
 {/* Últimas Noticias */}
 {/* Últimas Noticias */}
-<Text className="text-xl font-bold mt-6 mb-4 px-4">Últimas Noticias</Text>
+<Text className="text-xl text-grenn-700 font-bold mt-6 mb-4 px-4">Últimas Noticias</Text>
 <View className="space-y-4 px-4 mb-6">
   {[
     {
@@ -386,16 +386,16 @@ export default function User(): JSX.Element {
         className="absolute w-full h-full"
         resizeMode="cover"
       />
-      <View className="absolute inset-0 bg-black bg-opacity-50 p-4 justify-end">
-        <Text className="text-white font-bold text-lg">{news.title}</Text>
-        <Text className="text-white text-sm">{news.description}</Text>
+      <View className="absolute inset-0 bg-green-200 bg-opacity-50 p-4 justify-end">
+        <Text className="text-green-800 font-bold text-lg">{news.title}</Text>
+        <Text className="text-green-800 text-sm">{news.description}</Text>
         <View className="flex-row justify-between items-center mt-2">
-          <Text className="text-white text-xs">{news.date}</Text>
+          <Text className="text-green-800 text-xs">{news.date}</Text>
           <TouchableOpacity
-            className="bg-blue-600 px-3 py-1 rounded-full"
+            className="bg-green-200 px-3 py-1 rounded-full"
             onPress={() => console.log("Ver detalle:", news.title)}
           >
-            <Text className="text-white text-xs font-semibold">Ver detalle</Text>
+            <Text className="text-green-800 text-xs font-semibold">Ver detalle</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -436,9 +436,9 @@ export default function User(): JSX.Element {
 {/*  */}
       {/* Modal Producto */}
       <Modal visible={!!selectedProduct} animationType="slide" transparent>
-        <View className="flex-1 justify-center items-center bg-black/50">
+        <View className="flex-1 justify-center items-center bg-green-200/50">
           {selectedProduct && (
-            <View className="bg-white p-4 rounded-xl w-72">
+            <View className="bg-green-200  p-4 rounded-xl w-72">
               <Image
                 source={{ uri: selectedProduct.image }}
                 className="w-full h-52 rounded-lg"
@@ -454,7 +454,7 @@ export default function User(): JSX.Element {
       {/* Modal Doctor */}
       <Modal visible={modalVisible} animationType="slide" transparent>
       <View className="flex-1 justify-center items-center bg-gray-700/10 backdrop-blur-md px-4">
-      <View className="bg-white p-6 rounded-xl w-80 max-w-md">
+      <View className="bg-green-200  p-6 rounded-xl w-80 max-w-md">
       {selectedDoctor && (
         <>
           <Image
@@ -479,9 +479,9 @@ export default function User(): JSX.Element {
                 // Aquí podrías navegar a una pantalla de perfil con Expo Router
                 console.log("Ver perfil:", selectedDoctor.name);
               }}
-              className="bg-blue-600 flex-1 py-3 rounded-lg ml-2"
+              className="bg-green-200 flex-1 py-3 rounded-lg ml-2"
             >
-              <Text className="font-bold text-center text-white">Ver perfil</Text>
+              <Text className="font-bold text-center text-green-800">Ver perfil</Text>
             </Pressable>
           </View>
         </>

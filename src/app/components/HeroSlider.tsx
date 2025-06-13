@@ -12,19 +12,17 @@ import {
 
 const { width } = Dimensions.get("window");
 
-// ✅ Tipo para imagen: puede ser local (require) o remota (URL)
 type ImageSource = { uri: string } | number;
 
 interface HeroSliderProps {
   images?: ImageSource[];
 }
 
-// ✅ Imágenes por defecto (locales)
 const defaultImages: string[] = [
   "https://picsum.photos/id/1015/400/400",
   "https://picsum.photos/id/1016/400/400",
   "https://picsum.photos/id/1018/400/400",
-];;
+];
 
 const HeroSlider: React.FC<HeroSliderProps> = ({ images = defaultImages }) => {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -79,44 +77,45 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ images = defaultImages }) => {
               height: 8,
               marginHorizontal: 4,
               borderRadius: 999,
-              backgroundColor: currentIndex === index ? "#fff" : "#888",
+              backgroundColor:
+                currentIndex === index ? "#A7F3D0" : "#D1FAE5", // verdes pastel
             }}
           />
         ))}
       </View>
 
-      {/* Botón izquierdo */}
+      {/* Left arrow */}
       <TouchableOpacity
         style={{
           position: "absolute",
           top: "50%",
           left: 10,
           padding: 10,
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          backgroundColor: "rgba(72, 187, 120, 0.6)", // verde translúcido
           borderRadius: 50,
           opacity: currentIndex > 0 ? 1 : 0.5,
         }}
         onPress={() => goToSlide(currentIndex - 1)}
         disabled={currentIndex === 0}
       >
-        <Text style={{ color: "white", fontSize: 18 }}>{"<"}</Text>
+        <Text style={{ color: "#FFFFFF", fontSize: 18 }}>{"<"}</Text>
       </TouchableOpacity>
 
-      {/* Botón derecho */}
+      {/* Right arrow */}
       <TouchableOpacity
         style={{
           position: "absolute",
           top: "50%",
           right: 10,
           padding: 10,
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          backgroundColor: "rgba(72, 187, 120, 0.6)", // mismo tono
           borderRadius: 50,
           opacity: currentIndex < images.length - 1 ? 1 : 0.5,
         }}
         onPress={() => goToSlide(currentIndex + 1)}
         disabled={currentIndex === images.length - 1}
       >
-        <Text style={{ color: "white", fontSize: 18 }}>{">"}</Text>
+        <Text style={{ color: "#FFFFFF", fontSize: 18 }}>{">"}</Text>
       </TouchableOpacity>
     </View>
   );

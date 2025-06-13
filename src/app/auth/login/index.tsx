@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { View, TextInput, Text, Button } from "react-native";
-import { useAuth } from "../../../context/AuthProvider"; // Importa el hook correctamente
+import { useAuth } from "../../../context/AuthProvider";
 
 export default function LoginScreen(): JSX.Element {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
-  const { login } = useAuth(); // Extraer login correctamente
+  const { login } = useAuth();
 
   const { selectedCountry } = useLocalSearchParams<{
     selectedCountry?: string;
@@ -15,54 +15,61 @@ export default function LoginScreen(): JSX.Element {
 
   const handleLogin = async (): Promise<void> => {
     try {
-      await login(email, password); // Valida el login
-      router.push("/aplication/home-app"); // Redirige siempre a home-app
+      await login(email, password);
+      router.push("/aplication/home-app");
     } catch (error) {
       console.error("Error en login:", error);
-      // Puedes mostrar un mensaje si falla
+      // Aquí podrías agregar un Alert o Toast
     }
   };
-  
-  
+
   return (
-    <View className="flex-1 justify-center p-5 bg-gray-100">
-      <Text className="text-2xl font-bold text-center mb-5">Login</Text>
+    <View className="flex-1 justify-center p-5 bg-green-100">
+      <Text className="text-3xl font-bold text-center mb-5 text-green-700">Iniciar Sesión</Text>
 
       <TextInput
-        className="h-10 border border-gray-300 mb-4 px-3 py-2 rounded"
-        placeholder="Email"
+        className="h-12 border border-green-300 mb-4 px-4 py-2 rounded bg-green-50 text-green-800"
+        placeholder="Correo electrónico"
+        placeholderTextColor="#6B8E23"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
       />
       <TextInput
-        className="h-10 border border-gray-300 mb-4 px-3 py-2 rounded"
-        placeholder="Password"
+        className="h-12 border border-green-300 mb-4 px-4 py-2 rounded bg-green-50 text-green-800"
+        placeholder="Contraseña"
+        placeholderTextColor="#6B8E23"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Login" onPress={handleLogin} />
+      <View className="mb-4">
+        <Button
+          title="Ingresar"
+          color="#4CAF50" // un verde armónico
+          onPress={handleLogin}
+        />
+      </View>
 
       {selectedCountry && (
-        <Text className="text-center mt-2 text-gray-600">
-          Selected Country: {selectedCountry}
+        <Text className="text-center mt-2 text-green-700 font-medium">
+          País seleccionado: {selectedCountry}
         </Text>
       )}
 
       <View className="mt-5">
         <Text
-          className="text-center text-blue-500"
+          className="text-center text-green-600 underline"
           onPress={() => router.push("/auth/forgot-password")}
         >
-          Forgot Password?
+          ¿Olvidaste tu contraseña?
         </Text>
         <Text
-          className="text-center text-blue-500 mt-2"
+          className="text-center text-green-600 underline mt-2"
           onPress={() => router.push("/auth/signup")}
         >
-          Don't have an account? Sign Up
+          ¿No tienes cuenta? Regístrate
         </Text>
       </View>
     </View>

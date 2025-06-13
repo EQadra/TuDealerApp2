@@ -105,7 +105,7 @@ const products = [
   },
 ];
 
-export default function Profile(): JSX.Element {
+export default function Doctor(): JSX.Element {
   const { top, bottom } = useSafeAreaInsets();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
@@ -131,17 +131,22 @@ export default function Profile(): JSX.Element {
     }
   };
 
-  const handleNext = () => {
-    if (currentIndex < products.length - 1) {
-      scrollToIndex(currentIndex + 1);
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      const newIndex = currentIndex - 1;
+      setCurrentIndex(newIndex);
+      flatListRef.current?.scrollToIndex({ index: newIndex, animated: true });
     }
   };
 
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      scrollToIndex(currentIndex - 1);
+  const handleNext = () => {
+    if (currentIndex < products.length - 1) {
+      const newIndex = currentIndex + 1;
+      setCurrentIndex(newIndex);
+      flatListRef.current?.scrollToIndex({ index: newIndex, animated: true });
     }
   };
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -204,166 +209,155 @@ export default function Profile(): JSX.Element {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white" contentContainerStyle={{ paddingBottom: bottom }}>
+    <ScrollView className="flex-1 bg-green-200" contentContainerStyle={{ paddingBottom: bottom }}>
       {/* Header de navegación */}
-      <View
-        style={{ paddingTop: top }}
-        className="px-4 py-3 bg-white shadow-md flex-row justify-between items-center"
-      >
-        <Link className="font-bold text-xl text-blue-700" href="/">
-          ACME
-        </Link>
-        <View className="flex-row gap-4">
-          <Link className="text-md font-medium text-blue-600" href="/">
-            About
-          </Link>
-          <Link className="text-md font-medium text-blue-600" href="/">
-            Product
-          </Link>
-          <Link className="text-md font-medium text-blue-600" href="/">
-            Pricing
-          </Link>
-        </View>
-      </View>
+    
 
       {/* Perfil */}
-      <View className="flex-row items-center p-4 bg-gray-100 border-b border-gray-300">
+     {/* Perfil */}
+      <View className="flex-row items-center p-4 bg-green-50 border-b border-green-200">
         <Image
           source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }}
-          className="w-20 h-20 rounded-full"
+          className="w-20 h-20 rounded-full border-2 border-green-300"
         />
-       <View className="ml-4">
-  <Text className="text-lg font-semibold">Eduardo Cuadra</Text>
-  <View className="flex-row items-center space-x-1">
-  <Star filled />
-  <Star />
-  <Star filled />
-  <Star half />
-
-  <Star filled={false} />
-</View>
-  <Text className="text-sm text-gray-600">Frontend Dev en NetForemost</Text>
-</View>
-      </View>
-
-      {/* Doctores */}
-      <Text className="text-xl font-bold mt-6 mb-4 px-4">Doctores disponibles</Text>
-      <FlatList
-        data={doctors}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <View className="flex-row items-center bg-blue-100 rounded-lg mb-3 p-3 shadow-md">
-            <Image source={{ uri: item.avatar }} className="w-16 h-16 rounded-full" />
-            <View className="ml-3 flex-1">
-              <Text className="text-base font-semibold text-blue-800">{item.name}</Text>
-              <Text className="text-sm text-gray-600">Edad: {item.age}</Text>
-            </View>
-            <TouchableOpacity
-              className="bg-blue-600 px-3 py-1 rounded-lg"
-              onPress={() => openDoctorModal(item)}
-            >
-              <Text className="text-white text-sm">Ver más</Text>
-            </TouchableOpacity>
+        <View className="ml-4">
+          <Text className="text-lg font-semibold text-green-800">Eduardo Cuadra</Text>
+          <View className="flex-row items-center space-x-1">
+            <Star filled color="#16a34a" />
+            <Star color="#16a34a" />
+            <Star filled color="#16a34a" />
+            <Star half color="#16a34a" />
+            <Star filled={false} color="#16a34a" />
           </View>
-        )}
-      />
-
-      {/* Slider de Productos */}
-      <View className="relative px-4 mb-6">
-        <Text className="text-xl font-bold mb-4">Productos Destacados</Text>
-        <View className="relative">
-          <FlatList
-            ref={flatListRef}
-            data={products}
-            horizontal
-            keyExtractor={(item) => item.id.toString()}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <View className="w-60 mr-4">
-                <Image
-                  source={{ uri: item.image }}
-                  className="w-full h-40 rounded-lg"
-                />
-                <Text className="text-sm font-bold mt-2">{item.name}</Text>
-              </View>
-            )}
-          />
-          {/* Botones de navegación */}
-          <TouchableOpacity
-            className="absolute top-1/2 left-0 transform -translate-y-1/2 p-2 bg-gray-700 bg-opacity-60 rounded-full"
-            onPress={handlePrev}
-          >
-            <Text className="text-white text-xl">{"<"}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-gray-700 bg-opacity-60 rounded-full"
-            onPress={handleNext}
-          >
-            <Text className="text-white text-xl">{">"}</Text>
-          </TouchableOpacity>
+          <Text className="text-sm text-green-700">Frontend Dev en NetForemost</Text>
         </View>
       </View>
 
-      {/* Tabs y contenido */}
-      <Text className="text-xl font-bold mt-6 mb-4 px-4">Servicios, Productos y Promos</Text>
-      <View className="flex-row justify-around bg-gray-100 border-2 border-gray-300 rounded-lg py-2 mb-4 mx-4">
-        {tabs.map((tab) => (
-          <TouchableOpacity
-            key={tab}
-            className={`px-4 py-2 rounded-md ${
-              selectedTab === tab ? "bg-blue-500" : "bg-gray-200"
-            }`}
-            onPress={() => setSelectedTab(tab)}
-          >
-            <Text
-              className={`text-xs ${
-                selectedTab === tab ? "text-white" : "text-black"
-              }`}
-            >
-              {tab}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
 
-      <FlatList
-        data={tabContent[selectedTab] || []}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <View className="w-40 m-2 bg-white rounded-xl p-3 shadow-sm">
-            <Image source={{ uri: item.image }} className="w-full h-24 rounded-md" />
-            <Text className="text-sm font-bold mt-2">{item.name}</Text>
-            <Text className="text-xs text-gray-600 mt-1">{item.description}</Text>
-            <TouchableOpacity
-              className="bg-blue-500 p-2 rounded-full mt-2"
-              onPress={() => setSelectedProduct(item)}
-            >
-              <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
-                <Path
-                  d="M15 15L21 21"
-                  stroke="#fff"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <Path
-                  d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
-                  stroke="#fff"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </Svg>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+      {/* Doctores */}
+     {/* Doctores */}
+<Text className="text-xl font-bold mt-6 mb-4 px-4 text-green-800">Doctores disponibles</Text>
+<FlatList
+  data={doctors}
+  keyExtractor={(item) => item.id.toString()}
+  renderItem={({ item }) => (
+    <View className="flex-row items-center bg-green-100 rounded-lg mb-3 p-3 shadow-md">
+      <Image source={{ uri: item.avatar }} className="w-16 h-16 rounded-full border-2 border-green-300" />
+      <View className="ml-3 flex-1">
+        <Text className="text-base font-semibold text-green-800">{item.name}</Text>
+        <Text className="text-sm text-green-700">Edad: {item.age}</Text>
+      </View>
+      <TouchableOpacity
+        className="bg-green-600 px-3 py-1 rounded-lg"
+        onPress={() => openDoctorModal(item)}
+      >
+        <Text className="text-green-800 text-sm">Ver más</Text>
+      </TouchableOpacity>
+    </View>
+  )}
+/>
+
+
+      {/* Slider de Productos */}
+     {/* Slider de Productos */}
+<View className="relative px-4 mb-6 bg-green-50 py-4 rounded-xl">
+  <Text className="text-xl font-bold mb-4 text-green-800">Productos Destacados</Text>
+  <View className="relative">
+    <FlatList
+      ref={flatListRef}
+      data={products}
+      horizontal
+      keyExtractor={(item) => item.id.toString()}
+      showsHorizontalScrollIndicator={false}
+      renderItem={({ item }) => (
+        <View className="w-60 mr-4">
+          <Image
+            source={{ uri: item.image }}
+            className="w-full h-40 rounded-lg border border-green-200"
+          />
+          <Text className="text-sm font-bold mt-2 text-green-800">{item.name}</Text>
+        </View>
+      )}
+    />
+    {/* Botones de navegación */}
+    <TouchableOpacity
+      className="absolute top-1/2 left-2 transform -translate-y-1/2 p-1 bg-green-600 bg-opacity-80 rounded-full"
+      onPress={handlePrev}
+    >
+      <Text className="text-green-800 text-xl">{"<"}</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      className="absolute top-1/2 right-2 transform -translate-y-1/2 p-1 bg-green-600 bg-opacity-80 rounded-full"
+      onPress={handleNext}
+    >
+      <Text className="text-green-800 text-xl">{">"}</Text>
+    </TouchableOpacity>
+  </View>
+</View>
+
+
+      {/* Tabs y contenido */}
+      <Text className="text-xl font-bold text-green-700 mt-6 mb-4 px-4">Servicios, Productos y Promos</Text>
+
+<View className="flex-row justify-around bg-green-50 border-2 border-green-200 rounded-lg py-2 mb-4 mx-4">
+  {tabs.map((tab) => (
+    <TouchableOpacity
+      key={tab}
+      className={`px-4 py-2 rounded-md ${
+        selectedTab === tab ? "bg-green-600" : "bg-green-100"
+      }`}
+      onPress={() => setSelectedTab(tab)}
+    >
+      <Text
+        className={`text-xs ${
+          selectedTab === tab ? "text-green-800 font-semibold" : "text-green-800"
+        }`}
+      >
+        {tab}
+      </Text>
+    </TouchableOpacity>
+  ))}
+</View>
+
+<FlatList
+  data={tabContent[selectedTab] || []}
+  keyExtractor={(item) => item.id.toString()}
+  horizontal
+  showsHorizontalScrollIndicator={false}
+  renderItem={({ item }) => (
+    <View className="w-40 m-2 bg-green-50 rounded-xl p-3 shadow-sm border border-green-100">
+      <Image source={{ uri: item.image }} className="w-full h-24 rounded-md" />
+      <Text className="text-sm font-bold mt-2 text-green-800">{item.name}</Text>
+      <Text className="text-xs text-green-700 mt-1">{item.description}</Text>
+      <TouchableOpacity
+        className="bg-green-600 p-2 rounded-full mt-2"
+        onPress={() => setSelectedProduct(item)}
+      >
+        <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+          <Path
+            d="M15 15L21 21"
+            stroke="#fff"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <Path
+            d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+            stroke="#fff"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </Svg>
+      </TouchableOpacity>
+    </View>
+  )}
+/>
+
 {/* Últimas Noticias */}
 {/* Últimas Noticias */}
-<Text className="text-xl font-bold mt-6 mb-4 px-4">Últimas Noticias</Text>
-<View className="space-y-4 px-4 mb-6">
+<Text className="text-xl font-bold mt-6 text-green-700 mb-4 bg-green-200 px-4">Últimas Noticias</Text>
+<View className="space-y-4 bg-green-200 px-4 mb-6">
   {[
     {
       id: 1,
@@ -386,16 +380,16 @@ export default function Profile(): JSX.Element {
         className="absolute w-full h-full"
         resizeMode="cover"
       />
-      <View className="absolute inset-0 bg-black bg-opacity-50 p-4 justify-end">
-        <Text className="text-white font-bold text-lg">{news.title}</Text>
-        <Text className="text-white text-sm">{news.description}</Text>
+      <View className="absolute inset-0 bg-green-400 bg-opacity-50 p-4 justify-end">
+        <Text className="text-green-800 font-bold text-lg">{news.title}</Text>
+        <Text className="text-green-800 text-sm">{news.description}</Text>
         <View className="flex-row justify-between items-center mt-2">
-          <Text className="text-white text-xs">{news.date}</Text>
+          <Text className="text-green-800 text-xs">{news.date}</Text>
           <TouchableOpacity
-            className="bg-blue-600 px-3 py-1 rounded-full"
+            className="bg-green-300 px-3 py-1 rounded-full"
             onPress={() => console.log("Ver detalle:", news.title)}
           >
-            <Text className="text-white text-xs font-semibold">Ver detalle</Text>
+            <Text className="text-green-800 text-xs font-semibold">Ver detalle</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -406,8 +400,8 @@ export default function Profile(): JSX.Element {
 
 {/*  */}
 
-<View className="px-4 mb-6">
-      <Text className="text-xl font-bold mt-6 mb-4">Marcas Destacadas</Text>
+    <View className="px-4 bg-green-200 mb-6">
+      <Text className="text-xl text-green-700 font-bold mt-6 mb-4">Marcas Destacadas</Text>
       
       {/* Usamos un FlatList sin envolverlo en un ScrollView */}
       <FlatList
@@ -436,7 +430,7 @@ export default function Profile(): JSX.Element {
 {/*  */}
       {/* Modal Producto */}
       <Modal visible={!!selectedProduct} animationType="slide" transparent>
-        <View className="flex-1 justify-center items-center bg-black/50">
+        <View className="flex-1 justify-center items-center bg-green-200/50">
           {selectedProduct && (
             <View className="bg-white p-4 rounded-xl w-72">
               <Image
@@ -453,8 +447,8 @@ export default function Profile(): JSX.Element {
 
       {/* Modal Doctor */}
       <Modal visible={modalVisible} animationType="slide" transparent>
-      <View className="flex-1 justify-center items-center bg-gray-700/10 backdrop-blur-md px-4">
-      <View className="bg-white p-6 rounded-xl w-80 max-w-md">
+      <View className="flex-1 justify-center items-center bg-green-700/10 backdrop-blur-md px-4">
+      <View className="bg-green-100 p-6 rounded-xl w-80 max-w-md">
       {selectedDoctor && (
         <>
           <Image
@@ -471,7 +465,7 @@ export default function Profile(): JSX.Element {
               onPress={closeDoctorModal}
               className="bg-gray-300 flex-1 py-3 rounded-lg mr-2"
             >
-              <Text className="font-bold text-center">Cerrar</Text>
+              <Text className="font-bold text-center text-green-900">Cerrar</Text>
             </Pressable>
 
             <Pressable
@@ -479,9 +473,9 @@ export default function Profile(): JSX.Element {
                 // Aquí podrías navegar a una pantalla de perfil con Expo Router
                 console.log("Ver perfil:", selectedDoctor.name);
               }}
-              className="bg-blue-600 flex-1 py-3 rounded-lg ml-2"
+              className="bg-green-200 flex-1 py-3 rounded-lg ml-2"
             >
-              <Text className="font-bold text-center text-white">Ver perfil</Text>
+              <Text className="font-bold text-center text-green-900 ">Ver perfil</Text>
             </Pressable>
           </View>
         </>

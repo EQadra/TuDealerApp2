@@ -30,9 +30,9 @@ interface Badge {
   image: string;
 }
 
-const Store: React.FC = () => {
+const User: React.FC = () => {
   return (
-<View className="flex flex-1 bg-green-200  dark:bg-green-200">
+<View className="flex flex-1 bg-green-200 dark:bg-green-200">
       <Content />
     </View>
   );
@@ -44,7 +44,7 @@ const Content: React.FC = () => {
   const iconRefs = useRef<(TouchableOpacity | null)[]>([]);
 
   const items = [
-    { label: "ver detalle", route: "aplication/store" },
+    { label: "ver detalle", route: "aplication/doctor" },
     { label: "wsp personal" },
     { label: "formulario" },
   ];
@@ -58,7 +58,7 @@ const Content: React.FC = () => {
 
   const badges: Badge[] = Array.from({ length: 5 }, (_, i) => ({
     id: i,
-    label: `Tienda ${i + 1}`,
+    label: `Abogado ${i + 1}`,
     image: `https://picsum.photos/100/100?random=${i + 10}`,
   }));
 
@@ -84,13 +84,13 @@ const Content: React.FC = () => {
   };
 
   return (
-    <ScrollView className="flex-1 bg-green-200  dark:bg-green-200">
+    <ScrollView className="flex-1 bg-green-200 dark:bg-green-200">
      
       
       {/* Categorías */}
       <View className="px-4 mb-2">
         <Text className="text-2xl font-bold mb-4 dark:text-green-800">
-          Tiendas
+          Usuarios
         </Text>
         {badges.map((badge, index) => (
           <View
@@ -166,7 +166,7 @@ const Content: React.FC = () => {
         <View className="flex items-center text-center">
           <Link
             href="/"
-            className="mt-4 bg-green-200 text-green-800 dark:bg-green-200  dark:text-black px-4 py-2 rounded-md"
+            className="mt-4 bg-green-200 text-green-800 dark:bg-green-200 dark:text-black px-4 py-2 rounded-md"
           >
             Explorar
           </Link>
@@ -183,7 +183,7 @@ const Content: React.FC = () => {
           {news.map((item) => (
             <View
               key={item.id}
-              className="w-[48%] mb-4 rounded-lg overflow-hidden shadow bg-green-200  dark:bg-gray-800"
+              className="w-[48%] mb-4 rounded-lg overflow-hidden shadow bg-green-200 dark:bg-gray-800"
             >
               <Image source={{ uri: item.image }} className="h-32 w-full" />
               <View className="p-2">
@@ -215,7 +215,7 @@ const Content: React.FC = () => {
           {carouselImages.map((item) => (
             <View
               key={item.id}
-              className="w-[250px] mr-4 rounded-xl overflow-hidden shadow bg-green-200  dark:bg-gray-800"
+              className="w-[250px] mr-4 rounded-xl overflow-hidden shadow bg-green-200 dark:bg-gray-800"
             >
               <Image
                 source={{ uri: item.image }}
@@ -244,10 +244,10 @@ const Content: React.FC = () => {
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(40, 231, 23, 0.2)",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
   },
   dropdownMenu: {
-    backgroundColor: "rgba(24, 44, 22, 0.89)",
+    backgroundColor: "#fff",
     borderRadius: 8,
     padding: 8,
     elevation: 5,
@@ -260,8 +260,8 @@ const styles = StyleSheet.create({
   },
   dropdownText: {
     fontSize: 16,
-    color: "rgba(6, 7, 6, 0.99)",
+    color: "#333",
   },
 });
 
-export default Store;
+export default User;

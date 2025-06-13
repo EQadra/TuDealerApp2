@@ -1,21 +1,17 @@
 import { Link } from "expo-router";
-import React, { useState } from "react";
-import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { FontAwesome, Feather } from "@expo/vector-icons";
-
-const HomeApp: React.FC = () => {
-  return (
-    <View className="flex-1">
-      <Content />
-    </View>
-  );
-};
-
+import React from "react";
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 
 const routes = [
   {
-    title: "Asociacion",
+    title: "Asociación",
     image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
     route: "lists/asociation",
   },
@@ -36,29 +32,78 @@ const routes = [
   },
 ];
 
-const Content: React.FC = () => {
+const HomeApp: React.FC = () => {
   return (
-    <ScrollView className="flex-1 pt-20 px-4">
-      <Text className="text-xl font-bold mb-4 text-center">Selecciona una opción</Text>
-      <View className="flex flex-wrap flex-row justify-center gap-4">
-        {routes.map((item, index) => (
-          <Link key={index} href={item.route} asChild>
-            <TouchableOpacity className="w-40 h-48 bg-white rounded-lg shadow-md p-2 items-center">
-              <Image
-                source={{ uri: item.image }}
-                className="w-full h-32 rounded-md mb-2"
-                resizeMode="cover"
-              />
-              <Text className="text-center font-semibold">{item.title}</Text>
-            </TouchableOpacity>
-          </Link>
-        ))}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.title}>Selecciona una opción</Text>
+        <View style={styles.cardContainer}>
+          {routes.map((item, index) => (
+            <Link key={index} href={item.route} asChild>
+              <TouchableOpacity style={styles.card}>
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.image}
+                  resizeMode="cover"
+                />
+                <Text style={styles.cardText}>{item.title}</Text>
+              </TouchableOpacity>
+            </Link>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
-
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#DFF5E1",
+  },
+  scrollContainer: {
+    paddingTop: 60,
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#2F4F4F",
+  },
+  cardContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  card: {
+    width: "45%",           // Dos tarjetas por fila
+    margin: "2.5%",         // Espacio entre tarjetas
+    aspectRatio: 0.9,       // Ajusta altura proporcional
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 8,
+    alignItems: "center",
+    shadowColor: "#2E8B57",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  image: {
+    width: "100%",
+    height: "65%",
+    borderRadius: 10,
+    marginBottom: 8,
+  },
+  cardText: {
+    textAlign: "center",
+    fontWeight: "600",
+    fontSize: 16,
+    color: "#2F4F4F",
+  },
+});
 
 export default HomeApp;

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "scheme": "acme",
+    "name": "YourProjectName",
+    "slug": "YourProjectName",
+    "scheme": "yourprojectname",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
-    "web": {
-      "output": "static"
-    },
+    "version": "1.0.0",
     "plugins": [
       [
         "expo-router",
@@ -14,7 +14,33 @@
         }
       ]
     ],
-    "name": "YourProjectName",
-    "slug": "YourProjectName"
+    "extra": {
+      "router": {
+        "origin": "https://n"
+      },
+      "eas": {
+        "projectId": "510c9f00-7f1c-4aa2-8ebf-2d77fba33477"
+      }
+    },
+    "android": {
+      "package": "com.ecuadra.yourprojectname",
+      "versionCode": 1,
+      "permissions": [
+        "INTERNET",
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDt8aQU5GuTxXPt6zSoW-gPll889xk0ht0"
+        }
+      }
+    },
+    "web": {
+      "output": "static"
+    }
   }
 }

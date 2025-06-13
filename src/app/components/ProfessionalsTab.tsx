@@ -178,13 +178,13 @@ const ProfessionalsTab = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    backgroundColor: '#DFF5E1', // verde pastel muy suave
     padding: 16,
   },
   tabsContainer: {
     flexDirection: 'row',
     marginBottom: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#A7D7A8', // verde pastel medio
     borderRadius: 8,
     overflow: 'hidden',
   },
@@ -194,12 +194,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeTab: {
-    backgroundColor: '#2A59FE',
+    backgroundColor: '#86C79A', // verde pastel más intenso
   },
   tabText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#666',
+    color: '#4A5A4F', // tono gris verdoso
   },
   activeTabText: {
     color: '#FFFFFF',
@@ -217,9 +217,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.05,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 2,
   },
   professionalInfo: {
     flexDirection: 'row',
@@ -238,17 +238,17 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#333',
+    color: '#2D4633',
     marginBottom: 4,
   },
   profession: {
     fontSize: 14,
-    color: '#2A59FE',
+    color: '#67A97A', // verde suave para destacar
     fontWeight: '500',
   },
   specialty: {
     fontSize: 12,
-    color: '#666',
+    color: '#6B7B6E', // gris verdoso
   },
   detailButton: {
     flexDirection: 'row',
@@ -257,12 +257,12 @@ const styles = StyleSheet.create({
   },
   detailButtonText: {
     marginLeft: 4,
-    color: '#2A59FE',
+    color: '#67A97A',
     fontWeight: '500',
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -284,11 +284,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 4,
-    color: '#333',
+    color: '#2D4633',
   },
   modalProfession: {
     fontSize: 16,
-    color: '#2A59FE',
+    color: '#67A97A',
     textAlign: 'center',
     marginBottom: 16,
     fontWeight: '500',
@@ -299,21 +299,21 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontWeight: '600',
-    color: '#333',
+    color: '#2D4633',
     width: 100,
   },
   detailValue: {
     flex: 1,
-    color: '#666',
+    color: '#6B7B6E',
   },
   description: {
     marginTop: 16,
-    color: '#444',
+    color: '#445C4F',
     lineHeight: 20,
   },
   closeButton: {
     marginTop: 20,
-    backgroundColor: '#2A59FE',
+    backgroundColor: '#67A97A',
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',
@@ -324,5 +324,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
 
 export default ProfessionalsTab;

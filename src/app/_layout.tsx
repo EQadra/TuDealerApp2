@@ -82,6 +82,7 @@ export default function RootLayout(): JSX.Element {
               name="auth/login"
               options={{ headerShown: false }}
             />
+            
             <Stack.Screen
               name="auth/signup"
               options={{ headerShown: false }}
@@ -90,10 +91,13 @@ export default function RootLayout(): JSX.Element {
         </Stack>
 
           {/* Footer global */}
-          <View style={styles.footer}>
-                 <Footer />           
-          </View>
+
+            <View style={styles.footer}>
+                <Footer />           
+            </View>
+            
           {/* end footer */}
+
         </View>
     </AuthProvider>
   </GestureHandlerRootView>

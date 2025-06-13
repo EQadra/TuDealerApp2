@@ -12,13 +12,13 @@ export default function ProductTabs({ tabs, tabContent }) {
           <Pressable
             key={tab}
             onPress={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-full mx-3  ${
-              activeTab === tab ? "bg-blue-600" : "bg-gray-200"
+            className={`px-4 py-2 rounded-full mx-3 ${
+              activeTab === tab ? "bg-green-400" : "bg-green-100"
             }`}
           >
             <Text
               className={`text-sm font-medium ${
-                activeTab === tab ? "text-white" : "text-gray-800"
+                activeTab === tab ? "text-green-800" : "text-green-800"
               }`}
             >
               {tab}
@@ -39,11 +39,9 @@ export default function ProductTabs({ tabs, tabContent }) {
               className="w-24 h-24 rounded-md mx-2"
             />
             <View className="flex-1">
-              <Text className="text-lg mb-4 mt-0 font-semibold">{item.name}</Text>
-              <Text className="text-sm text-gray-600">{item.description}</Text>
-
-              <Text className="text-sm text-blue-300 text-gray-600">ver más ...</Text>
-
+              <Text className="text-lg mb-4 mt-0 font-semibold text-green-900">{item.name}</Text>
+              <Text className="text-sm text-green-700">{item.description}</Text>
+              <Text className="text-sm text-green-500 mt-1">ver más ...</Text>
             </View>
           </View>
         ))}

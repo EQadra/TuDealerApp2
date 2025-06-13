@@ -97,34 +97,39 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 20,
-    backgroundColor: "#f8f9fa",
+    backgroundColor: "#DFF5E1", // Fondo verde pastel
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
-    color: "#333",
+    color: "#2F4F4F", // Verde oscuro para contraste
   },
   picker: {
     height: 50,
     marginBottom: 15,
+    backgroundColor: "#C2E5D3",
+    borderRadius: 8,
+    color: "#2F4F4F",
   },
   input: {
     height: 50,
-    borderColor: "#ccc",
+    borderColor: "#A3D9A5", // Verde claro para bordes
     borderWidth: 1,
     marginBottom: 15,
     paddingHorizontal: 10,
     borderRadius: 8,
-    backgroundColor: "#fff",
+    backgroundColor: "#E9F7EF", // Fondo verde muy claro
+    color: "#2F4F4F",
   },
   link: {
-    color: "#007BFF",
+    color: "#388E3C", // Verde más fuerte para enlaces
     textAlign: "center",
     marginTop: 15,
     fontSize: 16,
   },
 });
+
 
 export default SignupScreen;

@@ -1,37 +1,78 @@
 import React, { useState } from "react";
+import { View, TextInput, Text, Button, Alert, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { View, TextInput, Text } from "react-native";
-import CustomButton from "../../components/CustomButton"; // Ajusta la ruta según corresponda
 
 export default function ForgotPasswordScreen(): JSX.Element {
   const [email, setEmail] = useState<string>("");
   const router = useRouter();
 
-  const handleResetPassword = (): void => {
-    console.log("Reset password for:", email);
-    router.push(`/auth/reset-password?email=${encodeURIComponent(email)}`);
+  const handlePasswordRecovery = async (): Promise<void> => {
+    try {
+      if (!email) {
+        Alert.alert("Error", "Please enter your email.");
+        return;
+      }
+
+      // Simulación de envío
+      Alert.alert("Success", `A password recovery link has been sent to ${email}.`);
+      router.push("/auth/login");
+    } catch (error) {
+      console.error("Error sending recovery email:", error);
+      Alert.alert("Error", "There was a problem sending the recovery email.");
+    }
   };
 
   return (
-    <View className="flex-1 justify-center p-5 bg-gray-100">
-      <Text className="text-2xl font-bold text-center mb-5">
-        Forgot Password
-      </Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Recuperar Contraseña</Text>
+
       <TextInput
-        className="h-10 border border-gray-300 mb-4 px-3 rounded"
-        placeholder="Email"
+        style={styles.input}
+        placeholder="Enter your email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
+        placeholderTextColor="#6B8E23"
       />
-      <CustomButton title="Reset Password" onPress={handleResetPassword} />
-      <Text
-        className="text-center text-blue-500 mt-4"
-        onPress={() => router.push("/auth/login")}
-      >
+
+      <Button title="Send Recovery Email" onPress={handlePasswordRecovery} />
+
+      <Text style={styles.link} onPress={() => router.push("/auth/login")}>
         Back to Login
       </Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "#DFF5E1", // Verde pastel
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#2F4F4F",
+  },
+  input: {
+    height: 50,
+    borderColor: "#A3D9A5",
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    backgroundColor: "#E9F7EF",
+    color: "#2F4F4F",
+    marginBottom: 15,
+  },
+  link: {
+    textAlign: "center",
+    color: "#388E3C",
+    marginTop: 20,
+    fontSize: 16,
+  },
+});

@@ -62,7 +62,7 @@ const Header: React.FC<{ darkMode: boolean; setDarkMode: (val: boolean) => void 
             }}
             style={{ width: 28, height: 28 }}
           />
-          <Text className="text-white font-bold text-lg">Nombre de Empresa</Text>
+          <Text className="text-green-800 font-bold text-lg">Nombre de Empresa</Text>
         </View>
 
         {/* Controles lado derecho */}
@@ -90,64 +90,71 @@ const Header: React.FC<{ darkMode: boolean; setDarkMode: (val: boolean) => void 
 
       {/* Menú lateral */}
       <Animated.View
-        style={{
-          transform: [{ translateX: slideAnim }],
-          position: "absolute",
-          top: top + 56,
-          left: 0,
-          width: "65%",
-          height: "100%",
-          backgroundColor: "#111",
-          paddingHorizontal: 16,
-          paddingVertical: 20,
-          zIndex: 100,
-        }}
-      >
-        <Text className="text-white font-bold text-lg mb-6 border-b border-gray-700 pb-2">
-          Menú Principal
-        </Text>
+  style={{
+    transform: [{ translateX: slideAnim }],
+    position: "absolute",
+    top: top + 56,
+    left: 0,
+    width: "70%",
+    height: "100%",
+    backgroundColor: "#d1fae5", // verde pastel claro
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+    zIndex: 100,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 0 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 10,
+  }}
+>
+  <Text className="text-emerald-800 font-bold text-lg mb-6 border-b border-emerald-300 pb-2">
+    Menú Principal
+  </Text>
 
-        {[
-          { title: "Inicio", icon: "home" },
-          { title: "Historial", icon: "history" },
-          { title: "Ajustes", icon: "cog" },
-        ].map((item, i) => (
-          <TouchableOpacity
-            key={i}
-            className="flex-row items-center gap-4 py-4 border-b border-gray-700"
-            onPress={() => {
-              Alert.alert(`${item.title} seleccionado`);
-              closeMenu();
-            }}
-          >
-            <View className="p-3 rounded-full bg-emerald-500">
-              <FontAwesome5 name={item.icon} size={20} color="white" />
-            </View>
-            <Text className="text-white text-base font-medium">{item.title}</Text>
-          </TouchableOpacity>
-        ))}
+  {[
+    { title: "Inicio", icon: "home" },
+    { title: "Historial", icon: "history" },
+    { title: "Ajustes", icon: "cog" },
+  ].map((item, i) => (
+    <TouchableOpacity
+      key={i}
+      className="flex-row items-center gap-4 py-3 border-b border-emerald-200"
+      onPress={() => {
+        Alert.alert(`${item.title} seleccionado`);
+        closeMenu();
+      }}
+    >
+      <View className="p-3 rounded-full bg-emerald-400">
+        <FontAwesome5 name={item.icon} size={18} color="white" />
+      </View>
+      <Text className="text-emerald-900 text-base font-medium">{item.title}</Text>
+    </TouchableOpacity>
+  ))}
 
-        <View className="mt-8">
-          <Text className="text-center text-gray-400">Versión 1.0.0</Text>
-        </View>
-      </Animated.View>
+  <View className="mt-8">
+    <Text className="text-center text-emerald-700 text-sm">Versión 1.0.0</Text>
+  </View>
+</Animated.View>
+
 
       {/* Fondo oscurecido al abrir menú */}
       {menuVisible && (
-        <TouchableOpacity
-          activeOpacity={1}
-          onPress={closeMenu}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0,0,0,0.5)",
-            zIndex: 50,
-          }}
-        />
-      )}
+  <TouchableOpacity
+    activeOpacity={1}
+    onPress={closeMenu}
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0,0,0,0.4)",
+      zIndex: 50, // menor que el zIndex del menú (100)
+    }}
+  />
+)}
+
     </View>
   );
 };

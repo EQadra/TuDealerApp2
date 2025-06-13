@@ -27,12 +27,12 @@ interface NewsItem {
 interface Badge {
   id: number;
   label: string;
-  image: string;
+  image: string; 
 }
 
-const Page: React.FC = () => {
+const Doctor: React.FC = () => {
   return (
-<View className="flex flex-1 bg-white dark:bg-black">
+<View className="flex flex-1 bg-green-200 dark:bg-green-200">
       <Content />
     </View>
   );
@@ -58,7 +58,7 @@ const Content: React.FC = () => {
 
   const badges: Badge[] = Array.from({ length: 5 }, (_, i) => ({
     id: i,
-    label: `Categoría ${i + 1}`,
+    label: `Doctor ${i + 1}`,
     image: `https://picsum.photos/100/100?random=${i + 10}`,
   }));
 
@@ -84,13 +84,13 @@ const Content: React.FC = () => {
   };
 
   return (
-    <ScrollView className="flex-1 bg-white dark:bg-black">
+    <ScrollView className="flex-1 bg-green-200 dark:bg-green-200">
      
       
       {/* Categorías */}
       <View className="px-4 mb-2">
-        <Text className="text-2xl font-bold mb-4 dark:text-white">
-          Categorías
+        <Text className="text-2xl font-bold mb-4 dark:text-green-800">
+          Doctores 
         </Text>
         {badges.map((badge, index) => (
           <View
@@ -102,13 +102,13 @@ const Content: React.FC = () => {
                 source={{ uri: badge.image }}
                 className="h-12 w-12 rounded-full mr-4"
               />
-              <Text className="text-lg dark:text-white">{badge.label}</Text>
+              <Text className="text-lg dark:text-green-800">{badge.label}</Text>
             </View>
             <TouchableOpacity
               ref={(ref) => (iconRefs.current[index] = ref)}
               onPress={() => openDropdown(index, badge.id)}
             >
-              <Text className="text-2xl dark:text-white">⋮</Text>
+              <Text className="text-2xl dark:text-green-800">⋮</Text>
             </TouchableOpacity>
           </View>
         ))}
@@ -166,7 +166,7 @@ const Content: React.FC = () => {
         <View className="flex items-center text-center">
           <Link
             href="/"
-            className="mt-4 bg-black text-white dark:bg-white dark:text-black px-4 py-2 rounded-md"
+            className="mt-4bg-green-200 text-green-800 dark:bg-green-200 dark:text-black px-4 py-2 rounded-md"
           >
             Explorar
           </Link>
@@ -176,18 +176,18 @@ const Content: React.FC = () => {
 
       {/* Últimas Noticias */}
       <View className="px-4 mb-8">
-        <Text className="text-2xl font-bold mb-4 dark:text-white text-center">
+        <Text className="text-2xl font-bold mb-4 dark:text-green-800 text-center">
           Últimas Noticias
         </Text>
         <View className="flex-row flex-wrap justify-between">
           {news.map((item) => (
             <View
               key={item.id}
-              className="w-[48%] mb-4 rounded-lg overflow-hidden shadow bg-white dark:bg-gray-800"
+              className="w-[48%] mb-4 rounded-lg overflow-hidden shadow bg-green-200 dark:bg-gray-800"
             >
               <Image source={{ uri: item.image }} className="h-32 w-full" />
               <View className="p-2">
-                <Text className="text-lg font-semibold dark:text-white">
+                <Text className="text-lg font-semibold dark:text-green-800">
                   {item.title}
                 </Text>
                 <Text className="text-sm text-gray-500 dark:text-gray-300">
@@ -198,8 +198,8 @@ const Content: React.FC = () => {
           ))}
         </View>
         <View className="items-center mt-4">
-          <TouchableOpacity className="bg-black py-2 px-4 rounded-md">
-            <Text className="text-white text-sm font-semibold">
+          <TouchableOpacity className="bg-green-200 py-2 px-4 rounded-md">
+            <Text className="text-green-800 text-sm font-semibold">
               Ver más noticias
             </Text>
           </TouchableOpacity>
@@ -208,14 +208,14 @@ const Content: React.FC = () => {
 
       {/* Carrusel */}
       <View className="px-4 mb-12">
-        <Text className="text-2xl font-bold mb-4 dark:text-white">
+        <Text className="text-2xl font-bold mb-4 dark:text-green-800">
           Galería de Noticias
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {carouselImages.map((item) => (
             <View
               key={item.id}
-              className="w-[250px] mr-4 rounded-xl overflow-hidden shadow bg-white dark:bg-gray-800"
+              className="w-[250px] mr-4 rounded-xl overflow-hidden shadow bg-green-200 dark:bg-gray-800"
             >
               <Image
                 source={{ uri: item.image }}
@@ -223,7 +223,7 @@ const Content: React.FC = () => {
                 resizeMode="cover"
               />
               <View className="p-2">
-                <Text className="text-lg font-semibold dark:text-white">
+                <Text className="text-lg font-semibold dark:text-green-800">
                   {item.title}
                 </Text>
                 <Text className="text-sm text-gray-500 dark:text-gray-300">
@@ -264,4 +264,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Page;
+export default Doctor;
