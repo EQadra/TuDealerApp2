@@ -463,7 +463,7 @@ export default function Doctor(): JSX.Element {
           <View className="flex-row justify-between mt-4">
             <Pressable
               onPress={closeDoctorModal}
-              className="bg-gray-300 flex-1 py-3 rounded-lg mr-2"
+              className="bg-green-300 flex-1 py-3 rounded-lg mr-2"
             >
               <Text className="font-bold text-center text-green-900">Cerrar</Text>
             </Pressable>

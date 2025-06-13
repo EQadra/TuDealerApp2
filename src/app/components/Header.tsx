@@ -51,7 +51,7 @@ const Header: React.FC<{ darkMode: boolean; setDarkMode: (val: boolean) => void 
       {/* Top bar */}
       <View
         className={`px-4 h-14 flex-row items-center justify-between ${
-          darkMode ? "bg-gray-900" : "bg-sky-500"
+          darkMode ? "bg-green-900" : "bg-sky-500"
         }`}
       >
         {/* Logo + nombre */}

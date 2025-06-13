@@ -183,7 +183,7 @@ const Content: React.FC = () => {
           {news.map((item) => (
             <View
               key={item.id}
-              className="w-[48%] mb-4 rounded-lg overflow-hidden shadow bg-green-200  dark:bg-gray-800"
+              className="w-[48%] mb-4 rounded-lg overflow-hidden shadow bg-green-200  dark:bg-green-800"
             >
               <Image source={{ uri: item.image }} className="h-32 w-full" />
               <View className="p-2">
@@ -215,7 +215,7 @@ const Content: React.FC = () => {
           {carouselImages.map((item) => (
             <View
               key={item.id}
-              className="w-[250px] mr-4 rounded-xl overflow-hidden shadow bg-green-200  dark:bg-gray-800"
+              className="w-[250px] mr-4 rounded-xl overflow-hidden shadow bg-green-200  dark:bg-green-800"
             >
               <Image
                 source={{ uri: item.image }}

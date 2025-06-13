@@ -227,7 +227,7 @@ export default function Lawyer(): JSX.Element {
       </View>
 
       {/* Perfil */}
-      <View className="flex-row items-center p-4 bg-gray-100 border-b border-gray-300">
+      <View className="flex-row items-center p-4 bg-green-100 border-b border-gray-300">
         <Image
           source={{ uri: "https://randomuser.me/api/portraits/men/32.jpg" }}
           className="w-20 h-20 rounded-full"
@@ -306,12 +306,12 @@ export default function Lawyer(): JSX.Element {
 
       {/* Tabs y contenido */}
       <Text className="text-xl font-bold mt-6 mb-4 px-4">Servicios, Productos y Promos</Text>
-      <View className="flex-row justify-around bg-gray-100 border-2 border-gray-300 rounded-lg py-2 mb-4 mx-4">
+      <View className="flex-row justify-around bg-green-100 border-2 border-gray-300 rounded-lg py-2 mb-4 mx-4">
         {tabs.map((tab) => (
           <TouchableOpacity
             key={tab}
             className={`px-4 py-2 rounded-md ${
-              selectedTab === tab ? "bg-blue-500" : "bg-gray-200"
+              selectedTab === tab ? "bg-blue-500" : "bg-green-200"
             }`}
             onPress={() => setSelectedTab(tab)}
           >
@@ -453,7 +453,7 @@ export default function Lawyer(): JSX.Element {
 
       {/* Modal Doctor */}
       <Modal visible={modalVisible} animationType="slide" transparent>
-      <View className="flex-1 justify-center items-center bg-gray-700/10 backdrop-blur-md px-4">
+      <View className="flex-1 justify-center items-center bg-green-700/10 backdrop-blur-md px-4">
       <View className="bg-green-200  p-6 rounded-xl w-80 max-w-md">
       {selectedDoctor && (
         <>
@@ -469,7 +469,7 @@ export default function Lawyer(): JSX.Element {
           <View className="flex-row justify-between mt-4">
             <Pressable
               onPress={closeDoctorModal}
-              className="bg-gray-300 flex-1 py-3 rounded-lg mr-2"
+              className="bg-green-300 flex-1 py-3 rounded-lg mr-2"
             >
               <Text className="font-bold text-center">Cerrar</Text>
             </Pressable>

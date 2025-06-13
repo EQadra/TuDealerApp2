@@ -11,7 +11,7 @@ export default function ProfileScreen(): JSX.Element {
   const userData = user || params;
 
   return (
-    <View className="flex-1 justify-center items-center bg-gray-100">
+    <View className="flex-1 justify-center items-center bg-green-100">
       <Text className="text-2xl font-bold">Lawyer Dashboard</Text>
       <Text className="mt-4 text-lg">Welcome, {userData.fullName}!</Text>
       <Text className="mt-2 text-gray-600">
