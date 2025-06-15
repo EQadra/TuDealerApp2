@@ -6,6 +6,9 @@ import { AuthProvider } from "../context/AuthProvider"; // Importa el AuthProvid
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Footer from "./components/Footer";
 
+import FooterApp from "./components/FooterApp";
+import Header from "./components/Header";
+
 export default function RootLayout(): JSX.Element {
   return (
   <GestureHandlerRootView style={{ flex: 1 }}>
@@ -13,6 +16,10 @@ export default function RootLayout(): JSX.Element {
       {" "}
       {/* Envuelve toda la aplicación con el AuthProvider */}
       <View style={styles.container}>    
+        
+      <View style={styles.footer}>
+                <Header />           
+            </View>
           {/* Contenedor de las pantallas */}
         <Stack>
           {/* Rutas de detalles */}
@@ -93,6 +100,11 @@ export default function RootLayout(): JSX.Element {
           {/* Footer global */}
 
             <View style={styles.footer}>
+                <FooterApp />           
+            </View>
+            
+            
+            <View style={styles.footer}>
                 <Footer />           
             </View>
             
@@ -106,8 +118,8 @@ export default function RootLayout(): JSX.Element {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
-  header: { padding: 20, backgroundColor: "#f0f0f0" },
+  header: { padding: 0, backgroundColor: "#f0f0f0" },
   headerText: { fontSize: 20, fontWeight: "bold" },
-  footer: { padding: 10, backgroundColor: "#f0f0f0" },
+  footer: { padding: 0, backgroundColor: "#f0f0f0" },
   footerText: { textAlign: "center" },
 });

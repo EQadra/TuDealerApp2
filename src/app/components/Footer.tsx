@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   footer: {
     backgroundColor: "#D1FAE5",
     alignItems: "center",
-    paddingVertical: 12,
+    paddingVertical: 16,
   },
   footerText: {
     color: "#065F46",
