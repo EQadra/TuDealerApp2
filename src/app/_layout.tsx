@@ -17,9 +17,9 @@ export default function RootLayout(): JSX.Element {
       {/* Envuelve toda la aplicación con el AuthProvider */}
       <View style={styles.container}>    
         
-      <View style={styles.footer}>
-                <Header />           
-            </View>
+            {/* <View style={styles.footer}>
+                <Header/>           
+            </View> */}
           {/* Contenedor de las pantallas */}
         <Stack>
           {/* Rutas de detalles */}
@@ -40,6 +40,14 @@ export default function RootLayout(): JSX.Element {
               name="lists/store"
               options={{ headerShown: false }}
             />
+
+            {/*  */}
+
+            <Stack.Screen
+              name="intro"
+              options={{ headerShown: false }}
+            />
+            {/*  */}
 
           {/*  */}
           {/* Rutas de detalles */}
@@ -72,6 +80,11 @@ export default function RootLayout(): JSX.Element {
           {/* Rutas de autenticación */}
           {/* <Stack.Screen name="(auth)/#" options={{ headerShown: false }} /> */}
 
+          <Stack.Screen
+              name="auth/options"
+              options={{ headerShown: false }}
+            />
+
             <Stack.Screen
               name="auth/profile"
               options={{ headerShown: false }}
@@ -94,19 +107,75 @@ export default function RootLayout(): JSX.Element {
               name="auth/signup"
               options={{ headerShown: false }}
             />
+
+       
+
+             {/* Rutas de autenticación */}
+          {/* <Stack.Screen name="(auth)/#" options={{ headerShown: false }} /> */}
+         
+            <Stack.Screen
+              name="intro/v2"
+              options={{ headerShown: false }}
+            />
+            
+            <Stack.Screen
+              name="intro/v3"
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="intro/v4"
+              options={{ headerShown: false }}
+            />                
+
+        <Stack.Screen
+              name="config/asociation"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="config/category"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="config/doctor"
+              options={{ headerShown: false }}
+            />
+           
+            <Stack.Screen
+              name="config/lawyer"
+              options={{ headerShown: false }}
+            />
+            
+            <Stack.Screen
+              name="config/product"
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="config/review"
+              options={{ headerShown: false }}
+            />
+           
+            <Stack.Screen
+              name="config/store"
+              options={{ headerShown: false }}
+            />
+            
+            <Stack.Screen
+              name="config/user"
+              options={{ headerShown: false }}
+            />
          
         </Stack>
 
           {/* Footer global */}
-
+{/* 
             <View style={styles.footer}>
                 <FooterApp />           
             </View>
+             */}
             
-            
-            <View style={styles.footer}>
+            {/* <View style={styles.footer}>
                 <Footer />           
-            </View>
+            </View> */}
             
           {/* end footer */}
 

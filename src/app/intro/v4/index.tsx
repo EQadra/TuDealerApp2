@@ -12,31 +12,31 @@ import { useRouter } from "expo-router"; // 👈 Importa el router
 
 const { width, height } = Dimensions.get("window");
 
-export default function IntroScreen() {
+export default function secondView() {
   const router = useRouter(); // 👈 Hook para navegación
 
   const handleSkipPress = () => {
-    router.push("/auth/options"); // 🔁 Cambia "/home" por la ruta deseada
+    router.push("/auth/login"); // 🔁 Cambia "/home" por la ruta deseada
   };
   
 
   const handlePlayPress = () => {
-    router.push("/intro/v2"); // 👈 Asegúrate que /nextScreen exista
+    router.push("/auth/login"); // 👈 Asegúrate que /nextScreen exista
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         {/* Skip button */}
-          <View style={styles.header}>
-                <TouchableOpacity style={styles.skipBadge} onPress={handleSkipPress}>
-                  <Text style={styles.skipText}>Skip</Text>
-                </TouchableOpacity>
-                </View>
+         <View style={styles.header}>
+            <TouchableOpacity style={styles.skipBadge} onPress={handleSkipPress}>
+              <Text style={styles.skipText}>Skip</Text>
+            </TouchableOpacity>
+          </View>
 
         {/* Center image */}
         <Image
-          source={require("../../assets/logo.png")}
+          source={require("../../../../assets/4.png")}
           style={styles.image}
           resizeMode="contain"
         />
@@ -71,6 +71,7 @@ export default function IntroScreen() {
 }
 
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -79,13 +80,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   card: {
-    width: width * 1,
-    height: height * 0.9,
+    width: width * 0.9,
+    height: height * 0.85,
     backgroundColor: "#004c31", // Verde oscuro
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
+    borderRadius: 20,
     padding: 20,
     justifyContent: "space-between",
     shadowColor: "#000",
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 5,
-    marginBottom:30,
+    marginBottom:20,
   },
   header: {
     alignItems: "flex-end",
@@ -132,8 +130,8 @@ const styles = StyleSheet.create({
   dotsContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    marginTop: 40,
-    marginBottom: 40,
+    marginTop: 20,
+    marginBottom: 10,
     paddingLeft: 10,
   },
   skipBadge: {

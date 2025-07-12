@@ -2,147 +2,242 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   Modal,
-  Image,
   Pressable,
+  TextInput,
+  Image,
+  FlatList,
+  Platform,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function Footer() {
-  const { bottom } = useSafeAreaInsets();
-  const [modalType, setModalType] = useState<null | "privacidad" | "terminos" | "acerca">(
-    null
-  );
+type Props = {
+  darkMode: boolean;
+};
 
-  const modalData = {
-    privacidad: {
-      title: "Política de Privacidad",
-      text: "Esta es una política de privacidad de ejemplo. Aquí iría la descripción sobre cómo manejamos tus datos.",
-      image: "https://picsum.photos/300?random=1",
-    },
-    terminos: {
-      title: "Términos y Condiciones",
-      text: "Estos son los términos de uso del servicio. Por favor, léelos con atención.",
-      image: "https://picsum.photos/300?random=2",
-    },
-    acerca: {
-      title: "Acerca de",
-      text: "Esta es una app desarrollada con React Native para fines demostrativos.",
-      image: "https://picsum.photos/300?random=3",
-    },
+export default function Footer({ darkMode }: Props): JSX.Element {
+  const { bottom } = useSafeAreaInsets();
+
+  const [visibleModal, setVisibleModal] = useState<null | "inicio" | "historial" | "ajustes">(null);
+
+  // Common states
+  const [textInputs, setTextInputs] = useState<string[]>(["", "", ""]);
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  // Images for inicio modal
+  const [images, setImages] = useState<(string | null)[]>([null, null]);
+
+  const pickImage = async (index: number) => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      const newImages = [...images];
+      newImages[index] = result.assets[0].uri;
+      setImages(newImages);
+    }
   };
 
-  return (
-    <View style={[styles.footer, { paddingBottom: bottom }]}>
-      <Text style={styles.footerText}>© {new Date().getFullYear()} Me</Text>
+  const removeImage = (index: number) => {
+    const newImages = [...images];
+    newImages[index] = null;
+    setImages(newImages);
+  };
 
-      <View style={styles.linkContainer}>
-        <TouchableOpacity onPress={() => setModalType("privacidad")}>
-          <Text style={styles.linkText}>Privacidad</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setModalType("terminos")}>
-          <Text style={styles.linkText}>Términos</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setModalType("acerca")}>
-          <Text style={styles.linkText}>Acerca de</Text>
-        </TouchableOpacity>
+  const resetForm = () => {
+    setTextInputs(["", "", ""]);
+    setDate(new Date());
+    setImages([null, null]);
+  };
+
+  const renderInicio = () => (
+    <View>
+      <Text className="text-lg font-semibold text-center mb-4">Inicio</Text>
+  
+      {/* Campos de texto adicionales */}
+      {[0, 1, 2].map((idx) => (
+        <TextInput
+          key={`inicio-text-${idx}`}
+          className="border border-gray-300 rounded-md p-2 mb-3"
+          placeholder={`Texto ${idx + 1}`}
+          value={textInputs[idx]}
+          onChangeText={(text) => {
+            const newInputs = [...textInputs];
+            newInputs[idx] = text;
+            setTextInputs(newInputs);
+          }}
+        />
+      ))}
+  
+      {/* Imágenes en fila */}
+      <View className="flex-row justify-between gap-2">
+        {[0, 1].map((idx) => (
+          <View key={idx} className="w-1/2 mb-4">
+            <TouchableOpacity
+              onPress={() => pickImage(idx)}
+              className="bg-sky-500 py-2 px-2 rounded-md mb-2"
+            >
+              <Text className="text-white text-center text-sm">
+                Seleccionar Imagen {idx + 1}
+              </Text>
+            </TouchableOpacity>
+  
+            {images[idx] && (
+              <View className="relative">
+                <Image
+                  source={{ uri: images[idx]! }}
+                  className="w-full h-24 rounded-md"
+                  resizeMode="cover"
+                />
+                <TouchableOpacity
+                  onPress={() => removeImage(idx)}
+                  className="absolute top-2 right-2 bg-black/60 rounded-full p-1"
+                >
+                  <MaterialIcons name="close" size={20} color="white" />
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+  
+
+  const renderHistorial = () => {
+    const data = [
+      { id: "1", transaccion: "Pago $100", fecha: "2025-05-01", usuario: "Juan" },
+      { id: "2", transaccion: "Envío $200", fecha: "2025-05-10", usuario: "Ana" },
+      { id: "3", transaccion: "Recibo $300", fecha: "2025-05-20", usuario: "Luis" },
+    ];
+
+    return (
+      <View>
+        <Text className="text-lg font-semibold text-center mb-4">Historial</Text>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View className="bg-gray-200 rounded-full px-4 py-2 mb-2">
+              <Text className="text-sm font-medium">
+                {item.transaccion} - {item.fecha} - {item.usuario}
+              </Text>
+            </View>
+          )}
+        />
+      </View>
+    );
+  };
+
+  const renderAjustes = () => (
+    <View>
+      <Text className="text-lg font-semibold text-center mb-4">Ajustes</Text>
+
+      {[0, 1, 2].map((idx) => (
+        <TextInput
+          key={idx}
+          className="border border-gray-300 rounded-md p-2 mb-3"
+          placeholder={`Campo ${idx + 1}`}
+          value={textInputs[idx]}
+          onChangeText={(text) => {
+            const newInputs = [...textInputs];
+            newInputs[idx] = text;
+            setTextInputs(newInputs);
+          }}
+        />
+      ))}
+
+      <TouchableOpacity
+        onPress={() => setShowDatePicker(true)}
+        className="border border-gray-300 rounded-md p-2 mb-3"
+      >
+        <Text>{date.toDateString()}</Text>
+      </TouchableOpacity>
+
+      {showDatePicker && (
+        <DateTimePicker
+          value={date}
+          mode="date"
+          display={Platform.OS === "ios" ? "spinner" : "default"}
+          onChange={(event, selectedDate) => {
+            setShowDatePicker(false);
+            if (selectedDate) setDate(selectedDate);
+          }}
+        />
+      )}
+    </View>
+  );
+
+  const renderModalContent = () => {
+    switch (visibleModal) {
+      case "inicio":
+        return renderInicio();
+      case "historial":
+        return renderHistorial();
+      case "ajustes":
+        return renderAjustes();
+      default:
+        return null;
+    }
+  };
+
+  const menuItems = [
+    { key: "inicio", label: "Inicio", icon: "home" },
+    { key: "historial", label: "Historial", icon: "history" },
+    { key: "ajustes", label: "Ajustes", icon: "cog" },
+  ];
+
+  return (
+    <>
+      <View
+        style={{ paddingBottom: bottom }}
+        className={`absolute bottom-0 left-0 right-0 px-4 h-17 pt-3 pb-2 flex-row justify-between items-center ${
+          darkMode ? "bg-gray-800" : "bg-sky-500"
+        }`}
+      >
+        {menuItems.map((item, idx) => (
+          <TouchableOpacity key={idx} onPress={() => setVisibleModal(item.key as any)}>
+            <View className="items-center">
+              <FontAwesome5 name={item.icon as any} size={16} color="white" />
+              <Text className="text-xs text-white">{item.label}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
 
-      {/* Modal genérico que usa modalType */}
       <Modal
+        transparent
+        visible={visibleModal !== null}
         animationType="slide"
-        transparent={true}
-        visible={modalType !== null}
-        onRequestClose={() => setModalType(null)}
+        onRequestClose={() => {
+          setVisibleModal(null);
+          resetForm();
+        }}
       >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalView}>
-            {modalType && (
-              <>
-                <Image
-                  source={{ uri: modalData[modalType].image }}
-                  style={styles.modalImage}
-                />
-                <Text style={styles.modalTitle}>{modalData[modalType].title}</Text>
-                <Text style={styles.modalText}>{modalData[modalType].text}</Text>
-                <Pressable
-                  style={styles.closeButton}
-                  onPress={() => setModalType(null)}
-                >
-                  <Text style={styles.closeButtonText}>Cerrar</Text>
-                </Pressable>
-              </>
-            )}
+        <View className="flex-1 justify-center items-center bg-black bg-opacity-50 px-4">
+          <View className="bg-white p-6 rounded-xl w-full max-w-md">
+            {renderModalContent()}
+
+            <Pressable
+              onPress={() => {
+                setVisibleModal(null);
+                resetForm();
+              }}
+              className="mt-4 bg-gray-600 py-2 rounded-lg"
+            >
+              <Text className="text-center text-white">Cerrar</Text>
+            </Pressable>
           </View>
         </View>
       </Modal>
-    </View>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  footer: {
-    backgroundColor: "#D1FAE5",
-    alignItems: "center",
-    paddingVertical: 16,
-  },
-  footerText: {
-    color: "#065F46",
-    fontSize: 14,
-    marginBottom: 6,
-  },
-  linkContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 20,
-  },
-  linkText: {
-    color: "#047857",
-    fontSize: 14,
-    textDecorationLine: "underline",
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalView: {
-    backgroundColor: "#ECFDF5",
-    borderRadius: 16,
-    padding: 20,
-    alignItems: "center",
-    elevation: 5,
-    width: "80%",
-  },
-  modalImage: {
-    width: 300,
-    height: 200,
-    borderRadius: 12,
-    marginBottom: 16,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#065F46",
-    marginBottom: 8,
-  },
-  modalText: {
-    color: "#065F46",
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 16,
-  },
-  closeButton: {
-    backgroundColor: "#10B981",
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-  },
-  closeButtonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
-});
