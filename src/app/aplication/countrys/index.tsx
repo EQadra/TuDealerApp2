@@ -9,6 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import { useRouter } from "expo-router";
+import Svg, { Path } from "react-native-svg";
 
 const COUNTRIES = [
   { name: "Perú", imageUrl: "https://flagcdn.com/w320/pe.png" },
@@ -30,28 +31,66 @@ export default function CountrySelector() {
     setSelectedCountry(country.name);
     setSelectedImage(country.imageUrl);
     setModalVisible(false);
+  };
 
-    // ✅ Redirigir a la vista login con el país como parámetro
-    router.push({
-      pathname: "aplication/home-app",
-      params: { selectedCountry: country.name },
-    });
+  const handleNext = () => {
+    if (selectedCountry) {
+      router.push({
+        pathname: "auth/login",
+        params: { selectedCountry },
+      });
+    }
   };
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../../../../assets/4.png")}
+        style={styles.iconImage}
+        resizeMode="contain"
+      />
+
+      <Text style={styles.title}>Selecciona tu país</Text>
+
+      <Text style={styles.description}>
+        Elige tu país de residencia para continuar.
+      </Text>
+
       <TouchableOpacity
         style={styles.selector}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.selectorText}>
-          {selectedCountry || "Selecciona tu país"}
-        </Text>
-        {selectedImage && (
-          <Image source={{ uri: selectedImage }} style={styles.flagSmall} />
-        )}
+        <View style={styles.selectorLeft}>
+          <Text style={styles.selectorText}>
+            {selectedCountry || "Selecciona tu país"}
+          </Text>
+          {selectedImage && (
+            <Image source={{ uri: selectedImage }} style={styles.flagSmall} />
+          )}
+        </View>
+        <Svg width={20} height={20} viewBox="0 0 24 24" fill="none">
+          <Path
+            d="M9 6l6 6-6 6"
+            stroke="#2F4F4F"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </Svg>
       </TouchableOpacity>
 
+      <TouchableOpacity
+        onPress={handleNext}
+        style={[
+          styles.nextButton,
+          { backgroundColor: selectedCountry ? "#004d32" : "#A5D6A7" },
+        ]}
+        disabled={!selectedCountry}
+      >
+        <Text style={styles.nextButtonText}>Siguiente</Text>
+      </TouchableOpacity>
+
+      {/* Modal */}
       <Modal visible={modalVisible} animationType="slide">
         <View style={styles.modalContainer}>
           <FlatList
@@ -62,8 +101,19 @@ export default function CountrySelector() {
                 style={styles.item}
                 onPress={() => handleSelect(item)}
               >
-                <Image source={{ uri: item.imageUrl }} style={styles.flag} />
-                <Text style={styles.countryName}>{item.name}</Text>
+                <View style={styles.countryInfo}>
+                  <Image source={{ uri: item.imageUrl }} style={styles.flag} />
+                  <Text style={styles.countryName}>{item.name}</Text>
+                </View>
+                <Svg width={20} height={20} viewBox="0 0 24 24" fill="none">
+                  <Path
+                    d="M9 6l6 6-6 6"
+                    stroke="#2F4F4F"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </Svg>
               </TouchableOpacity>
             )}
           />
@@ -81,45 +131,85 @@ export default function CountrySelector() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // ocupa toda la pantalla
-    justifyContent: "center", // centra verticalmente
-    alignItems: "center", // centra horizontalmente
-    backgroundColor: "#DFF5E1", // fondo pastel verde
-    padding: 20,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    padding: 24,
+  },
+  iconImage: {
+    width: 150,
+    height: 150,
+    marginBottom: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#2F4F4F",
+    marginBottom: 8,
+  },
+  description: {
+    fontSize: 16,
+    color: "#2F4F4F",
+    textAlign: "center",
+    marginBottom: 24,
   },
   selector: {
     borderWidth: 1,
-    borderColor: "#2F4F4F",
+    borderColor: "#004d32",
     borderRadius: 8,
     padding: 12,
-    backgroundColor: "#C2E5D3",
+    backgroundColor: "#f0f0f0",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100%", // puedes cambiar a un ancho fijo si prefieres
+    width: "100%",
     maxWidth: 350,
+    marginBottom: 24,
+  },
+  selectorLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
   },
   selectorText: {
     fontSize: 16,
     color: "#2F4F4F",
+    marginRight: 10,
   },
   flagSmall: {
     width: 32,
     height: 20,
     borderRadius: 4,
   },
+  nextButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 8,
+    marginTop: 80,
+  },
+  nextButtonText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#fff",
+  },
   modalContainer: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#DFF5E1",
+    backgroundColor: "#ffffff",
   },
   item: {
     flexDirection: "row",
     alignItems: "center",
     padding: 12,
     marginVertical: 4,
-    backgroundColor: "#fff",
+    backgroundColor: "#f9f9f9",
     borderRadius: 8,
+    justifyContent: "space-between",
+  },
+  countryInfo: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   flag: {
     width: 40,
@@ -134,7 +224,7 @@ const styles = StyleSheet.create({
   closeButton: {
     marginTop: 20,
     alignSelf: "center",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#004d32",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 8,

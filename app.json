@@ -6,9 +6,9 @@
     "userInterfaceStyle": "automatic",
     "orientation": "default",
     "version": "1.0.0",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/logo.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#DFF5E1"  // Usa el color de fondo de tu app para simular transparencia
     },

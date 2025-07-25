@@ -9,26 +9,36 @@ import {
   StyleSheet,
 } from "react-native";
 
-const routes = [
+const badges = [
   {
     title: "Asociación",
-    image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg",
+    description: "Información de asociaciones disponibles",
+    image: require("../../../../assets/6.png"),
     route: "lists/asociation",
   },
   {
     title: "Doctor",
-    image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg",
+    description: "Listado de doctores certificados",
+    image: require("../../../../assets/7.png"),
     route: "lists/doctor",
   },
   {
     title: "Abogado",
-    image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg",
+    description: "Contacta abogados registrados",
+    image: require("../../../../assets/8.png"),
     route: "lists/lawyer",
   },
   {
     title: "Usuario",
-    image: "https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg",
+    description: "Acceso a la cuenta de usuario",
+    image: require("../../../../assets/9.png"),
     route: "lists/store",
+  },
+  {
+    title: "Soporte",
+    description: "Ayuda y contacto con soporte",
+    image: require("../../../../assets/10.png"), // Asegúrate que exista esta imagen
+    route: "lists/support",
   },
 ];
 
@@ -36,17 +46,27 @@ const HomeApp: React.FC = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.title}>Selecciona una opción</Text>
-        <View style={styles.cardContainer}>
-          {routes.map((item, index) => (
+        {/* Logo circular */}
+        <Image
+          source={require("../../../../assets/logo.png")}
+          style={styles.logo}
+        />
+
+        {/* Título principal */}
+        <Text style={styles.mainTitle}>Bienvenido a la App</Text>
+
+        {/* Badges con imagen, título y descripción */}
+        <View style={styles.badgeList}>
+          {badges.map((item, index) => (
             <Link key={index} href={item.route} asChild>
-              <TouchableOpacity style={styles.card}>
-                <Image
-                  source={{ uri: item.image }}
-                  style={styles.image}
-                  resizeMode="cover"
-                />
-                <Text style={styles.cardText}>{item.title}</Text>
+              <TouchableOpacity style={styles.badge}>
+                <Image source={item.image} style={styles.badgeImage} />
+                <View style={styles.badgeTextContainer}>
+                  <Text style={styles.badgeTitle}>{item.title}</Text>
+                  <Text style={styles.badgeDescription}>
+                    {item.description}
+                  </Text>
+                </View>
               </TouchableOpacity>
             </Link>
           ))}
@@ -62,47 +82,60 @@ const styles = StyleSheet.create({
     backgroundColor: "#DFF5E1",
   },
   scrollContainer: {
+    alignItems: "center",
     paddingTop: 60,
     paddingHorizontal: 16,
     paddingBottom: 20,
   },
-  title: {
-    fontSize: 20,
+  logo: {
+    width: 100,
+    height: 100,
+    borderRadius: 50, // Hacerlo circular
+    marginBottom: 16,
+    borderWidth: 2,
+    borderColor: "#4CAF50",
+  },
+  mainTitle: {
+    fontSize: 24,
     fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 20,
     color: "#2F4F4F",
+    marginBottom: 30,
+    textAlign: "center",
   },
-  cardContainer: {
+  badgeList: {
+    width: "100%",
+    gap: 16,
+  },
+  badge: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
-  card: {
-    width: "45%",           // Dos tarjetas por fila
-    margin: "2.5%",         // Espacio entre tarjetas
-    aspectRatio: 0.9,       // Ajusta altura proporcional
-    backgroundColor: "#ffffff",
+    alignItems: "flex-start",
+    backgroundColor: "#fff",
     borderRadius: 12,
-    padding: 8,
-    alignItems: "center",
+    padding: 12,
     shadowColor: "#2E8B57",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.15,
     shadowRadius: 4,
-    elevation: 4,
+    elevation: 2,
   },
-  image: {
-    width: "100%",
-    height: "65%",
-    borderRadius: 10,
-    marginBottom: 8,
+  badgeImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 12,
   },
-  cardText: {
-    textAlign: "center",
-    fontWeight: "600",
+  badgeTextContainer: {
+    flex: 1,
+  },
+  badgeTitle: {
     fontSize: 16,
+    fontWeight: "bold",
     color: "#2F4F4F",
+    marginBottom: 4,
+  },
+  badgeDescription: {
+    fontSize: 14,
+    color: "#555",
   },
 });
 

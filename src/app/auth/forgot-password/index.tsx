@@ -13,7 +13,6 @@ export default function ForgotPasswordScreen(): JSX.Element {
         return;
       }
 
-      // Simulación de envío
       Alert.alert("Success", `A password recovery link has been sent to ${email}.`);
       router.push("/auth/login");
     } catch (error) {
@@ -24,7 +23,7 @@ export default function ForgotPasswordScreen(): JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Recuperar Contraseña</Text>
+      <Text style={styles.title}>Recover Password</Text>
 
       <TextInput
         style={styles.input}
@@ -33,10 +32,14 @@ export default function ForgotPasswordScreen(): JSX.Element {
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
-        placeholderTextColor="#6B8E23"
+        placeholderTextColor="#7CA290"
       />
 
-      <Button title="Send Recovery Email" onPress={handlePasswordRecovery} />
+      <Button
+        title="Send Recovery Email"
+        onPress={handlePasswordRecovery}
+        color="#004d32"
+      />
 
       <Text style={styles.link} onPress={() => router.push("/auth/login")}>
         Back to Login
@@ -50,28 +53,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 20,
-    backgroundColor: "#DFF5E1", // Verde pastel
+    backgroundColor: "#ffffff", // Cambiado a blanco
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
-    color: "#2F4F4F",
+    color: "#004d32", // Verde oscuro
   },
   input: {
     height: 50,
-    borderColor: "#A3D9A5",
+    borderColor: "#b4dccf",
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
-    backgroundColor: "#E9F7EF",
-    color: "#2F4F4F",
+    backgroundColor: "#f4fdf9",
+    color: "#004d32",
     marginBottom: 15,
   },
   link: {
     textAlign: "center",
-    color: "#388E3C",
+    color: "#004d32",
     marginTop: 20,
     fontSize: 16,
   },

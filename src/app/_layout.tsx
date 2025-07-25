@@ -3,6 +3,7 @@ import React from "react";
 import { Stack } from "expo-router";
 import { View, Text, StyleSheet } from "react-native";
 import { AuthProvider } from "../context/AuthProvider"; // Importa el AuthProvider
+import { AppProvider } from "../context/AppContext"; // Ajusta ruta según estructura
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Footer from "./components/Footer";
 
@@ -105,6 +106,10 @@ export default function RootLayout(): JSX.Element {
             
             <Stack.Screen
               name="auth/signup"
+              options={{ headerShown: false }}
+            />
+              <Stack.Screen
+              name="auth/auth-intro"
               options={{ headerShown: false }}
             />
 

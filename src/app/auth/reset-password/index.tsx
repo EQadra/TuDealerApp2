@@ -22,43 +22,45 @@ export default function ResetPasswordScreen(): JSX.Element {
 
     console.log("Resetting password for:", email);
     console.log("New Password:", newPassword);
-    router.replace("/auth/login"); // Reemplaza la ruta para evitar volver con "atrás"
+    router.replace("/auth/login");
   };
 
   return (
-    <View className="flex-1 justify-center p-5 bg-green-100">
-      <Text className="text-2xl font-bold text-center mb-5">
+    <View className="flex-1 justify-center p-5 bg-white">
+      <Text className="text-2xl font-bold text-center mb-5 text-[#004d32]">
         Reset Password
       </Text>
 
       {email && (
-        <Text className="text-center mb-3 text-gray-600">
+        <Text className="text-center mb-3 text-[#5e8276]">
           Resetting for: {email}
         </Text>
       )}
 
       <TextInput
-        className="h-10 border border-gray-300 mb-4 px-3 rounded"
+        className="h-12 border border-[#b4dccf] mb-4 px-4 rounded bg-[#f4fdf9] text-[#004d32]"
         placeholder="New Password"
         value={newPassword}
         onChangeText={setNewPassword}
         secureTextEntry
         autoCapitalize="none"
+        placeholderTextColor="#7CA290"
       />
 
       <TextInput
-        className="h-10 border border-gray-300 mb-4 px-3 rounded"
+        className="h-12 border border-[#b4dccf] mb-4 px-4 rounded bg-[#f4fdf9] text-[#004d32]"
         placeholder="Confirm Password"
         value={confirmPassword}
         onChangeText={setConfirmPassword}
         secureTextEntry
         autoCapitalize="none"
+        placeholderTextColor="#7CA290"
       />
 
       <CustomButton title="Reset Password" onPress={handleResetPassword} />
 
       <Text
-        className="text-center text-blue-500 mt-4"
+        className="text-center text-[#004d32] mt-4"
         onPress={() => router.push("/auth/login")}
       >
         Back to Login

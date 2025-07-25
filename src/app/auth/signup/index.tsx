@@ -15,11 +15,11 @@ import { useRouter } from "expo-router";
 import CustomButton from "../../components/CustomButton";
 
 const roles = [
-  { label: "Usuario", value: "usuario", icon: require("../../../../assets/icons/user.png") },
-  { label: "Abogado", value: "abogado", icon: require("../../../../assets/icons/abogado.png") },
-  { label: "Doctor", value: "doctor", icon: require("../../../../assets/icons/doctor.png") },
-  { label: "Asociación", value: "asociacion", icon: require("../../../../assets/icons/asociacion.png") },
-  { label: "Tienda", value: "tienda", icon: require("../../../../assets/icons/tienda.png") },
+  { label: "Usuario", value: "usuario", icon: require("../../../../assets/7.png") },
+  { label: "Abogado", value: "abogado", icon: require("../../../../assets/8.png") },
+  { label: "Doctor", value: "doctor", icon: require("../../../../assets/6.png") },
+  { label: "Asociación", value: "asociacion", icon: require("../../../../assets/10.png") },
+  { label: "Tienda", value: "tienda", icon: require("../../../../assets/9.png") },
 ];
 
 const SignupScreen = () => {
@@ -63,6 +63,7 @@ const SignupScreen = () => {
       value={formData[selectedForm][item]}
       onChangeText={(value) => handleInputChange(item, value)}
       secureTextEntry={item === "password" || item === "repeatPassword"}
+      placeholderTextColor="#7CA290"
     />
   );
 
@@ -81,13 +82,11 @@ const SignupScreen = () => {
           <Image source={require("../../../../assets/logo.png")} style={styles.logo} />
         </View>
 
-        {/* Custom selector con icono */}
         <TouchableOpacity style={styles.selector} onPress={() => setShowModal(true)}>
           <Image source={selectedRole?.icon} style={styles.selectorIcon} />
           <Text style={styles.selectorText}>{selectedRole?.label}</Text>
         </TouchableOpacity>
 
-        {/* Modal con opciones */}
         <Modal visible={showModal} transparent animationType="fade">
           <TouchableOpacity style={styles.modalOverlay} onPress={() => setShowModal(false)}>
             <View style={styles.modalContainer}>
@@ -116,6 +115,7 @@ const SignupScreen = () => {
         />
 
         <CustomButton title="Registro" onPress={handleSignup} style={styles.customButton} />
+
         <TouchableOpacity onPress={() => router.push("auth/login")}>
           <Text style={styles.link}>¿Ya tienes cuenta? Inicia sesión</Text>
         </TouchableOpacity>
@@ -128,17 +128,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#DFF5E1",
+    backgroundColor: "#ffffff", // fondo blanco
   },
   title: {
     fontSize: 20,
     fontWeight: "600",
     marginBottom: 16,
     textAlign: "center",
-    color: "#2F4F4F",
+    color: "#004d32", // verde principal
   },
   logoContainer: {
-    backgroundColor: "#1B5E20",
+    backgroundColor: "#004d32",
     borderRadius: 80,
     padding: 15,
     marginBottom: 15,
@@ -155,7 +155,9 @@ const styles = StyleSheet.create({
   selector: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#C2E5D3",
+    backgroundColor: "#f4fdf9",
+    borderColor: "#b4dccf",
+    borderWidth: 1,
     borderRadius: 6,
     paddingVertical: 10,
     paddingHorizontal: 14,
@@ -168,17 +170,17 @@ const styles = StyleSheet.create({
   },
   selectorText: {
     fontSize: 16,
-    color: "#2F4F4F",
+    color: "#004d32",
   },
   input: {
     height: 42,
-    borderColor: "#A3D9A5",
+    borderColor: "#b4dccf",
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 6,
-    backgroundColor: "#E9F7EF",
-    color: "#2F4F4F",
+    backgroundColor: "#f4fdf9",
+    color: "#004d32",
     fontSize: 14,
   },
   customButton: {
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   link: {
-    color: "#388E3C",
+    color: "#004d32",
     textAlign: "center",
     marginTop: 12,
     fontSize: 14,
@@ -215,7 +217,7 @@ const styles = StyleSheet.create({
   },
   modalLabel: {
     fontSize: 16,
-    color: "#333",
+    color: "#004d32",
   },
 });
 

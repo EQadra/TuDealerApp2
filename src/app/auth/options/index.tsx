@@ -4,10 +4,10 @@ import { Link } from 'expo-router';
 export default function WelcomeScreen() {
   return (
     <View style={styles.container}>
-      {/* Logo circular con fondo verde */}
+      {/* Logo circular con fondo verde oscuro */}
       <View style={styles.logoContainer}>
         <Image
-          source={require('../../../../assets/logo.png')} // Imagen local
+          source={require('../../../../assets/logo.png')}
           style={styles.logo}
         />
       </View>
@@ -19,13 +19,13 @@ export default function WelcomeScreen() {
       {/* Botones con navegación */}
       <Link href="auth/login" asChild>
         <TouchableOpacity style={styles.buttonPrimary}>
-          <Text style={styles.buttonText}>Ingresar</Text>
+          <Text style={styles.buttonPrimaryText}>Ingresar</Text>
         </TouchableOpacity>
       </Link>
 
       <Link href="auth/signup" asChild>
         <TouchableOpacity style={styles.buttonSecondary}>
-          <Text style={styles.buttonText}>Registrarse</Text>
+          <Text style={styles.buttonSecondaryText}>Registrarse</Text>
         </TouchableOpacity>
       </Link>
     </View>
@@ -35,13 +35,13 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 30,
   },
   logoContainer: {
-    backgroundColor: '#34A853',
+    backgroundColor: '#004d32',
     borderRadius: 100,
     padding: 20,
     marginBottom: 30,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#333',
+    color: '#004d32',
   },
   subText: {
     fontSize: 16,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   buttonPrimary: {
-    backgroundColor: '#34A853',
+    backgroundColor: '#004d32',
     paddingVertical: 15,
     paddingHorizontal: 50,
     borderRadius: 30,
@@ -71,9 +71,14 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
+  buttonPrimaryText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   buttonSecondary: {
     backgroundColor: '#ffffff',
-    borderColor: '#34A853',
+    borderColor: '#004d32',
     borderWidth: 2,
     paddingVertical: 15,
     paddingHorizontal: 50,
@@ -81,8 +86,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  buttonText: {
-    color: '#34A853',
+  buttonSecondaryText: {
+    color: '#004d32',
     fontSize: 16,
     fontWeight: 'bold',
   },

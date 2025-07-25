@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -7,59 +7,57 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
+import { useRouter } from "expo-router";
+import { useAppContext } from "../../../context/AppContext";
 import Svg, { Polygon } from "react-native-svg";
-import { useRouter } from "expo-router"; // 👈 Importa el router
 
 const { width, height } = Dimensions.get("window");
 
-export default function secondView() {
-  const router = useRouter(); // 👈 Hook para navegación
+export default function FourthView() {
+  const router = useRouter();
+  const { setActiveView } = useAppContext();
 
-  const handleSkipPress = () => {
-    router.push("/auth/login"); // 🔁 Cambia "/home" por la ruta deseada
-  };
-  
-
-  const handlePlayPress = () => {
-    router.push("/auth/login"); // 👈 Asegúrate que /nextScreen exista
-  };
+  useEffect(() => {
+    setActiveView(3);
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        {/* Skip button */}
-         <View style={styles.header}>
-            <TouchableOpacity style={styles.skipBadge} onPress={handleSkipPress}>
-              <Text style={styles.skipText}>Skip</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.header}>
+          {/* Botón Atrás */}
+          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+            <Text style={styles.backText}>Atrás</Text>
+          </TouchableOpacity>
 
-        {/* Center image */}
+          {/* Botón Saltar */}
+          <TouchableOpacity style={styles.skipBadge} onPress={() => router.push("/auth/auth-intro")}>
+            <Text style={styles.skipText}>Saltar</Text>
+          </TouchableOpacity>
+        </View>
+
         <Image
           source={require("../../../../assets/4.png")}
           style={styles.image}
           resizeMode="contain"
         />
-
-        {/* Title */}
         <Text style={styles.title}>App Exclusiva para Latam</Text>
-
-        {/* Description */}
         <Text style={styles.description}>
-          TuDealer App es la primera red social Cannabica de todo latinoamerica
-          y es un hito para las nuevas generaciones y comunidades.
+          TuDealer App es la primera red social Cannábica de todo latinoamérica...
         </Text>
 
-        {/* Progress Dots + Play Button */}
         <View style={styles.progressRow}>
           <View style={styles.dotsContainer}>
+            <View style={styles.dot} />
+            <View style={styles.dot} />
+            <View style={styles.dot} />
             <View style={[styles.dot, styles.activeDot]} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
           </View>
 
-          <TouchableOpacity style={styles.playButton} onPress={handlePlayPress}>
+          <TouchableOpacity
+            style={styles.playButton}
+            onPress={() => router.push("/auth/auth-intro")}
+          >
             <Svg width={20} height={20} viewBox="0 0 100 100">
               <Polygon points="40,30 70,50 40,70" fill="#fff" />
             </Svg>
@@ -70,104 +68,105 @@ export default function secondView() {
   );
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#EAF6F6",
+    backgroundColor: "#ffffff",
     alignItems: "center",
     justifyContent: "center",
   },
   card: {
     width: width * 0.9,
     height: height * 0.85,
-    backgroundColor: "#004c31", // Verde oscuro
+    backgroundColor: "#DFF5E1",
     borderRadius: 20,
     padding: 20,
     justifyContent: "space-between",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 5,
-    marginBottom:20,
+    elevation: 4,
   },
   header: {
-    alignItems: "flex-end",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
   },
-  skipButton: {
-    backgroundColor: "#fff",
-    borderColor: "#000",
+  backButton: {
+    backgroundColor: "#ffffff",
+    borderColor: "#004d32",
     borderWidth: 1,
-    borderRadius: 8,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    borderRadius: 50,
+    paddingVertical: 4,
+    paddingHorizontal: 14,
+  },
+  backText: {
+    color: "#004d32",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  skipBadge: {
+    backgroundColor: "#ffffff",
+    borderColor: "#004d32",
+    borderWidth: 1,
+    borderRadius: 50,
+    paddingVertical: 4,
+    paddingHorizontal: 14,
   },
   skipText: {
-    color: "#000",
-    fontSize: 16,
+    color: "#004d32",
+    fontSize: 14,
     fontWeight: "bold",
   },
   image: {
     width: "100%",
-    height: height * 0.4, // 40% de la pantalla
+    height: height * 0.4,
     marginVertical: 20,
-    marginLeft:20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#333",
+    color: "#004d32",
   },
   description: {
-    fontSize: 12,
+    fontSize: 14,
     textAlign: "center",
-    color: "#666",
-    paddingHorizontal: 10,
+    color: "#5c7a70",
+    paddingHorizontal: 12,
   },
   dotsContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
     marginTop: 20,
-    marginBottom: 10,
     paddingLeft: 10,
-  },
-  skipBadge: {
-    backgroundColor: "#fff",
-    borderColor: "#000",
-    borderWidth: 1,
-    borderRadius: 50, // más redondo, estilo badge
-    paddingVertical: 2,
-    paddingHorizontal: 12,
-    alignSelf: "flex-end",
   },
   playButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#007BFF",
+    backgroundColor: "#004d32",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 10,
+    marginRight: 10,
   },
   progressRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: 20,
-    marginBottom: 10,
     paddingHorizontal: 10,
-  },  
+  },
   dot: {
     width: 20,
     height: 12,
     borderRadius: 6,
-    backgroundColor: "#ccc",
+    backgroundColor: "#A3D9A5",
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: "#007BFF",
+    backgroundColor: "#004d32",
   },
 });
