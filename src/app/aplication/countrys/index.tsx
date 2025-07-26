@@ -83,7 +83,7 @@ export default function CountrySelector() {
         onPress={handleNext}
         style={[
           styles.nextButton,
-          { backgroundColor: selectedCountry ? "#004d32" : "#A5D6A7" },
+          { backgroundColor: selectedCountry ? "#004d32" : "#c7c7c7" },
         ]}
         disabled={!selectedCountry}
       >
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   nextButtonText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#fff",
+    color: "#ffffff",
   },
   modalContainer: {
     flex: 1,

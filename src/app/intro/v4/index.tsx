@@ -21,6 +21,16 @@ export default function FourthView() {
     setActiveView(3);
   }, []);
 
+  const navigateToStep = (step: number) => {
+    const routes = [
+      "/onboarding/first",
+      "/onboarding/second",
+      "/onboarding/third",
+      "/onboarding/fourth",
+    ];
+    router.push(routes[step]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -31,7 +41,10 @@ export default function FourthView() {
           </TouchableOpacity>
 
           {/* Botón Saltar */}
-          <TouchableOpacity style={styles.skipBadge} onPress={() => router.push("/auth/auth-intro")}>
+          <TouchableOpacity
+            style={styles.skipBadge}
+            onPress={() => router.push("/auth/auth-intro")}
+          >
             <Text style={styles.skipText}>Saltar</Text>
           </TouchableOpacity>
         </View>
@@ -48,10 +61,16 @@ export default function FourthView() {
 
         <View style={styles.progressRow}>
           <View style={styles.dotsContainer}>
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-            <View style={[styles.dot, styles.activeDot]} />
+            {[0, 1, 2, 3].map((index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => navigateToStep(index)}
+                style={[
+                  styles.dot,
+                  index === 3 && styles.activeDot, // Paso actual
+                ]}
+              />
+            ))}
           </View>
 
           <TouchableOpacity
@@ -78,15 +97,15 @@ const styles = StyleSheet.create({
   card: {
     width: width * 0.9,
     height: height * 0.85,
-    backgroundColor: "#DFF5E1",
+    backgroundColor: "#1B4F37",
     borderRadius: 20,
     padding: 20,
-    justifyContent: "space-between",
+    justifyContent: "space-between", // Mantiene distribución adecuada
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 4,
+    elevation: 5,
   },
   header: {
     flexDirection: "row",
@@ -108,9 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   skipBadge: {
-    backgroundColor: "#ffffff",
-    borderColor: "#004d32",
-    borderWidth: 1,
+    backgroundColor: "#c7c7c7", // Plomo claro
     borderRadius: 50,
     paddingVertical: 4,
     paddingHorizontal: 14,
@@ -129,7 +146,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#004d32",
+    color: "#c7c7c7",
   },
   description: {
     fontSize: 14,
@@ -147,7 +164,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#004d32",
+    backgroundColor: "#c7c7c7",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
@@ -155,7 +172,7 @@ const styles = StyleSheet.create({
   progressRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between", // Distribución correcta entre dots y play
     marginTop: 20,
     paddingHorizontal: 10,
   },
@@ -163,10 +180,10 @@ const styles = StyleSheet.create({
     width: 20,
     height: 12,
     borderRadius: 6,
-    backgroundColor: "#A3D9A5",
+    backgroundColor: "#c7c7c7", // Gris claro como "Saltar"
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: "#004d32",
+    backgroundColor: "#5e5e5e", // Gris más oscuro para el actual
   },
 });

@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#DFF5E1"  // Usa el color de fondo de tu app para simular transparencia
+      "backgroundColor": "#1B4F37"  // Usa el color de fondo de tu app para simular transparencia
     },
     "plugins": [
       [

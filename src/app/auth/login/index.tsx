@@ -156,14 +156,14 @@ export default function LoginScreen(): JSX.Element {
     {/* LINKS */}
     <View className="mt-5">
       <Text
-        className="text-center underline"
+        className="text-center text-xs  underline"
         style={{ color: "#004d32" }}
         onPress={() => router.push("/auth/forgot-password")}
       >
         ¿Olvidaste tu contraseña?
       </Text>
       <Text
-        className="text-center underline mt-2"
+        className="text-center text-xs underline mt-2"
         style={{ color: "#004d32" }}
         onPress={() => router.push("/auth/signup")}
       >

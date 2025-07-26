@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
   card: {
     width: width * 0.9,
     height: height * 0.85,
-    backgroundColor: "#DFF5E1",
+    backgroundColor: "#1B4F37",
     borderRadius: 20,
     padding: 20,
-    justifyContent: "space-between",
+    justifyContent: "space-between", // Mantiene distribución adecuada
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -86,12 +86,26 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   header: {
-    alignItems: "flex-end",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
   },
-  skipBadge: {
-    backgroundColor: "#fff",
+  backButton: {
+    backgroundColor: "#ffffff",
     borderColor: "#004d32",
     borderWidth: 1,
+    borderRadius: 50,
+    paddingVertical: 4,
+    paddingHorizontal: 14,
+  },
+  backText: {
+    color: "#004d32",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  skipBadge: {
+    backgroundColor: "#c7c7c7", // Plomo claro
     borderRadius: 50,
     paddingVertical: 4,
     paddingHorizontal: 14,
@@ -102,16 +116,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   image: {
-    width: "50%",
+    width: "100%",
     height: height * 0.2,
     marginVertical: 20,
-    alignSelf: "center",
+    alignSelf: "center", 
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#004d32",
+    color: "#c7c7c7",
   },
   description: {
     fontSize: 14,
@@ -129,7 +143,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#004d32",
+    backgroundColor: "#c7c7c7",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
@@ -137,7 +151,7 @@ const styles = StyleSheet.create({
   progressRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between", // Distribución correcta entre dots y play
     marginTop: 20,
     paddingHorizontal: 10,
   },
@@ -145,10 +159,10 @@ const styles = StyleSheet.create({
     width: 20,
     height: 12,
     borderRadius: 6,
-    backgroundColor: "#A3D9A5",
+    backgroundColor: "#c7c7c7", // Gris claro como "Saltar"
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: "#004d32",
+    backgroundColor: "#5e5e5e", // Gris más oscuro para el actual
   },
 });

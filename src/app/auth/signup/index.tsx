@@ -8,11 +8,10 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  FlatList,
   Modal,
+  ScrollView,
 } from "react-native";
 import { useRouter } from "expo-router";
-import CustomButton from "../../components/CustomButton";
 
 const roles = [
   { label: "Usuario", value: "usuario", icon: require("../../../../assets/7.png") },
@@ -45,42 +44,31 @@ const SignupScreen = () => {
   const handleSignup = () => {
     const data = formData[selectedForm];
     if (!data.email || !data.password || !data.repeatPassword) {
-      alert("Please fill in all required fields.");
+      alert("Por favor completa todos los campos.");
       return;
     }
     if (data.password !== data.repeatPassword) {
-      alert("Passwords do not match.");
+      alert("Las contraseñas no coinciden.");
       return;
     }
     router.push({ pathname: "/login", params: { email: data.email } });
   };
 
-  const renderInput = ({ item }: { item: string }) => (
-    <TextInput
-      key={item}
-      style={styles.input}
-      placeholder={item.charAt(0).toUpperCase() + item.slice(1)}
-      value={formData[selectedForm][item]}
-      onChangeText={(value) => handleInputChange(item, value)}
-      secureTextEntry={item === "password" || item === "repeatPassword"}
-      placeholderTextColor="#7CA290"
-    />
-  );
-
   const selectedRole = roles.find((role) => role.value === selectedForm);
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={styles.flex}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={60}
     >
-      <View style={styles.container}>
-        <Text style={styles.title}>Sign Up</Text>
+      <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
 
         <View style={styles.logoContainer}>
           <Image source={require("../../../../assets/logo.png")} style={styles.logo} />
         </View>
+
+        <Text style={styles.title}>Bienvenido, crea tu cuenta</Text>
 
         <TouchableOpacity style={styles.selector} onPress={() => setShowModal(true)}>
           <Image source={selectedRole?.icon} style={styles.selectorIcon} />
@@ -107,50 +95,63 @@ const SignupScreen = () => {
           </TouchableOpacity>
         </Modal>
 
-        <FlatList
-          data={Object.keys(formData[selectedForm])}
-          keyExtractor={(item) => item}
-          renderItem={renderInput}
-          contentContainerStyle={{ paddingBottom: 10 }}
-        />
+        {Object.keys(formData[selectedForm]).map((field) => (
+          <TextInput
+            key={field}
+            style={styles.input}
+            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+            value={formData[selectedForm][field]}
+            onChangeText={(value) => handleInputChange(field, value)}
+            secureTextEntry={field === "password" || field === "repeatPassword"}
+            placeholderTextColor="#7CA290"
+          />
+        ))}
 
-        <CustomButton title="Registro" onPress={handleSignup} style={styles.customButton} />
+        <TouchableOpacity style={styles.registerButton} onPress={handleSignup}>
+          <Text style={styles.registerText}>Registrar</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.push("auth/login")}>
           <Text style={styles.link}>¿Ya tienes cuenta? Inicia sesión</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  flex: {
     flex: 1,
-    padding: 16,
-    backgroundColor: "#ffffff", // fondo blanco
+    backgroundColor: "#ffffff",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginBottom: 16,
-    textAlign: "center",
-    color: "#004d32", // verde principal
+  scrollContainer: {
+    flexGrow: 1,
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   logoContainer: {
     backgroundColor: "#004d32",
-    borderRadius: 80,
+    borderRadius: 100,
     padding: 15,
-    marginBottom: 15,
-    alignSelf: "center",
+    marginTop: 20,
+    marginBottom: 12,
     alignItems: "center",
     justifyContent: "center",
   },
   logo: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 90,
+    height: 90,
     resizeMode: "contain",
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 20,
+    color: "#004d32",
+    textAlign: "center",
   },
   selector: {
     flexDirection: "row",
@@ -173,7 +174,8 @@ const styles = StyleSheet.create({
     color: "#004d32",
   },
   input: {
-    height: 42,
+    width: "100%",
+    height: 38,
     borderColor: "#b4dccf",
     borderWidth: 1,
     marginBottom: 10,
@@ -181,18 +183,27 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: "#f4fdf9",
     color: "#004d32",
-    fontSize: 14,
+    fontSize: 13,
   },
-  customButton: {
-    paddingVertical: 6,
+  registerButton: {
+    width: "80%",
+    backgroundColor: "#004d32",
+    paddingVertical: 12,
     borderRadius: 60,
-    marginTop: 5,
+    marginTop: 10,
+    alignSelf: "center",
+  },
+  registerText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
+    textAlign: "center",
   },
   link: {
     color: "#004d32",
     textAlign: "center",
-    marginTop: 12,
-    fontSize: 14,
+    marginTop: 8,
+    fontSize: 12,
   },
   modalOverlay: {
     flex: 1,
